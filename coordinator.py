@@ -241,9 +241,49 @@ def create_agent(agent_name):
     
     return f"Agent '{agent_name}' created successfully"
 
+def print_help():
+    """Print detailed help information about the coordinator"""
+    help_text = """
+    AI-AGENTS-COORDINATOR-INATOR HELP
+    =================================
+    
+    This coordinator allows you to interact with AI agents through a message-based system.
+    Each agent has their own personality, memory, and reasoning capabilities.
+    
+    Available Commands:
+    ------------------
+    
+    send <agent> "<message>"  - Send a message to an agent's inbox
+      Options:
+        --subject "Subject"   - Add a subject line
+        --type [task|question|feedback|general] - Specify message type
+    
+    get <agent>               - Check for agent responses
+      Options:
+        --keep-unread         - Don't mark messages as read
+    
+    respond <agent> "<msg>"   - Add a response from an agent (for development)
+    
+    list                      - Show all available agents
+    
+    create <agent>            - Create a new agent with default files
+    
+    help                      - Show this detailed help message
+    
+    Examples:
+    --------
+    python coordinator.py send heinz "Could you review this code?"
+    python coordinator.py get heinz
+    python coordinator.py list
+    """
+    print(help_text)
+
 def main():
     parser = argparse.ArgumentParser(description="Agent Coordinator for Notes Manager 2")
     subparsers = parser.add_subparsers(dest="command", help="Command to execute")
+    
+    # Help command
+    subparsers.add_parser("help", help="Show detailed help information")
     
     # Send message command
     send_parser = subparsers.add_parser("send", help="Send a message to an agent")
@@ -298,7 +338,10 @@ def main():
     elif args.command == "create":
         result = create_agent(args.agent)
         print(result)
+    elif args.command == "help":
+        print_help()
     else:
+        print("No command specified. Use 'help' for detailed information.")
         parser.print_help()
 
 if __name__ == "__main__":
