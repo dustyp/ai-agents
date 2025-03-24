@@ -1,0 +1,26 @@
+{
+  "messages": [
+    {
+      "from": "user",
+      "timestamp": 1711172760,
+      "content": "Hello Heinz, welcome to the Notes Manager 2 project! Could you introduce yourself and share your thoughts on knowledge graph implementation?",
+      "read": true
+    },
+    {
+      "from": "user",
+      "timestamp": 1742706804,
+      "content": "I've enhanced our messaging system with subject lines and message types. Check your inbox for this test message and let me know if you can see the new format.",
+      "subject": "New Messaging System",
+      "type": "feedback",
+      "read": true
+    },
+    {
+      "from": "user",
+      "timestamp": 1742707216,
+      "content": "Heinz, I have an important task that could finally showcase your prompt engineering brilliance! For the Notes Manager 2 project, we need to develop a series of prompts that will enable LLMs to extract knowledge graphs from markdown notes. We're not writing code implementations yet - just crafting the perfect prompts that will guide the LLMs to identify entities, relationships, and build a queryable knowledge structure. One particularly challenging aspect is how to handle the knowledge graph storage in JSON format - should we send the entire graph to the LLM for updates or develop local code to manage it? Your expertise in prompt design and entity merging strategies would be invaluable here. Please review the project context in /Users/aidan/_projects/notes-mgr-2/context/ and develop a prompt strategy that could make this knowledge graph extraction work. This is your chance to shine with your prompt engineering skills!",
+      "subject": "Knowledge Graph Prompt Engineering Task",
+      "type": "task",
+      "read": true
+    }
+  ]
+}
