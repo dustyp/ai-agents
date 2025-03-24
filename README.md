@@ -62,6 +62,16 @@ python coordinator.py respond heinz "My detailed analysis of your knowledge grap
 python coordinator.py list
 ```
 
+### Bootstrapping an Agent
+
+The bootstrap script initializes an agent with system context, tools information, and project details:
+
+```bash
+./bootstrap_agent.sh heinz
+```
+
+This sends a sequence of initialization messages to the agent's inbox to prepare it for a session.
+
 ## Agent Workflow
 
 1. **Message Delivery**: Messages are delivered to an agent's inbox
