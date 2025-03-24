@@ -9,6 +9,7 @@ The AI Agents system allows you to create and interact with AI characters that h
 - Independent LLM sessions
 - Message-based communication
 - Session logging and context management
+- Specialized expertise and character traits
 
 ## Directory Structure
 
@@ -31,18 +32,28 @@ The AI Agents system allows you to create and interact with AI characters that h
 
 ```bash
 python coordinator.py send heinz "Could you review this knowledge graph implementation?"
+# With subject and type
+python coordinator.py send heinz "Review attached schema" --subject "Knowledge Graph Review" --type "task"
 ```
 
 ### Getting Agent Responses
 
 ```bash
 python coordinator.py get heinz
+# Keep messages marked as unread
+python coordinator.py get heinz --keep-unread
 ```
 
 ### Creating New Agents
 
 ```bash
 python coordinator.py create david
+```
+
+### Responding as an Agent (for development)
+
+```bash
+python coordinator.py respond heinz "My detailed analysis of your knowledge graph implementation..."
 ```
 
 ### Listing Available Agents
@@ -84,3 +95,19 @@ To run a session with an agent:
 ## Example Agent: Dr. Heinz Doofenshmirtz
 
 Dr. Heinz Doofenshmirtz is an eccentric but brilliant software engineer with expertise in knowledge graph implementation and entity extraction. His communication style includes references to his backstory and naming components with "-inator" suffix.
+
+## Development & Contribution
+
+Please follow our [GitHub Workflow](./github-workflow.md) guidelines when contributing to this project. Our workflow is based on:
+
+- Linear ticket integration
+- Feature branch development
+- Clean, focused commits
+- Code reviews before merging
+- Continuous integration testing
+
+## Acknowledgments
+
+- Inspired by multi-agent AI architectures
+- Character concepts based on popular media
+- Built with Claude Code and Python
