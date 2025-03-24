@@ -65,7 +65,7 @@ Include any important context or considerations.
 5. **Local Rebasing**: Clean up local commits before pushing
    ```bash
    # Squash or fixup messy commit history
-   git rebase -i HEAD~<number-of-commits>
+   git rebase -i $(git merge-base HEAD main)  # Squash all commits since branching from main
    ```
 
 ## CI and GitHub Actions
@@ -137,8 +137,8 @@ npm run test
 git fetch origin
 git rebase origin/main
 
-# Optional: Squash commits into logical units
-git rebase -i HEAD~<number-of-commits>
+# Squash all commits on this branch into a single, well-crafted commit
+git rebase -i $(git merge-base HEAD main)
 
 # Push to remote
 git push --force-with-lease
@@ -163,11 +163,14 @@ PRs are ready to merge when:
 
 ### Merge Strategy
 
-We use GitHub's "Rebase and merge" option which:
-1. Applies all PR commits individually to main
-2. Preserves the detailed commit history
+We use GitHub's "Squash and merge" option which:
+1. Combines all branch commits into a single commit
+2. Creates a clean, focused entry in the main branch history
 3. Maintains a linear history
-4. Preserves authorship information
+4. Uses the PR title and description for the commit message
+5. Preserves authorship information
+
+Note: Since we already squash commits locally before PR creation, this is often redundant but ensures consistency in our main branch history.
 
 ### Post-Merge Cleanup
 
@@ -222,8 +225,8 @@ git fetch origin
 git rebase origin/main
 npm run test
 
-# 4. Optional: Clean up commit history
-git rebase -i HEAD~5  # Assuming 5 commits to clean up
+# 4. Squash all branch commits into a single, well-crafted commit
+git rebase -i $(git merge-base HEAD main)
 
 # 5. Push to remote
 git push --force-with-lease
