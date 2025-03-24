@@ -70,20 +70,36 @@ Include any important context or considerations.
 
 ## CI and GitHub Actions
 
-Our CI pipeline automatically runs on every push and has these key checks:
+As our CI pipeline evolves, we'll implement these key checks:
 
-1. **Linting**: Style and code quality checks
-2. **Type Checking**: For type safety
-3. **Unit Tests**: For individual components
-4. **Integration Tests**: For component interactions
-5. **Build Verification**: Ensures the project builds correctly
+1. **Basic Linting**: Essential style and code quality rules
+2. **Type Checking**: Where applicable
+3. **Critical Tests**: Focus on core functionality
+4. **Build Verification**: Ensures the project builds correctly
 
 ### CI Requirements for PR Approval
 
-- All CI checks must pass
-- Minimum 85% code coverage for new code
+- All implemented CI checks must pass
 - No critical security vulnerabilities
-- No performance regressions
+- PRs should not degrade existing functionality
+
+### Linting Philosophy
+
+We follow a minimalist approach to linting:
+- Focus on functionality-impacting issues, not stylistic preferences
+- Implement only rules with clear value and broad agreement
+- Automatically fix formatting issues where possible
+- Document exceptions when breaking rules is necessary
+
+### Local Verification Before Push
+
+Always run these checks locally before pushing:
+```bash
+# Run whatever linting and testing tools are set up for the project
+# For example (actual commands will vary based on our toolchain):
+./scripts/lint.sh
+./scripts/test.sh
+```
 
 ## Rebase vs Merge: Our Approach
 
@@ -130,8 +146,8 @@ Create a PR when:
 Before creating a PR:
 
 ```bash
-# Ensure tests pass
-npm run test
+# Verify code quality locally (specific commands depend on project tooling)
+# Run any established linting/testing scripts
 
 # Rebase on latest main
 git fetch origin
@@ -223,7 +239,7 @@ git commit -m "[AI-123] Add login form and client-side validation"
 # 3. Prepare for PR
 git fetch origin
 git rebase origin/main
-npm run test
+# Run local quality checks (whatever is established for the project)
 
 # 4. Squash all branch commits into a single, well-crafted commit
 git rebase -i $(git merge-base HEAD main)
