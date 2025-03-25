@@ -1,25 +1,77 @@
-# PROCEDURES LIBRARY [CHECKSUM:d7ac46]
+# PROCEDURES LIBRARY [CHECKSUM:73b5c9]
+
+PROCEDURE: sequential_thinking_scope_refinement
+PRECONDITIONS:
+  - Task request received
+  - Initial understanding of requirements
+STEPS:
+  1. IDENTIFY CORE NEED: What fundamental problem is being solved?
+     - Strip away implementation details to find core requirement
+     - Distinguish between essential vs. nice-to-have features
+  
+  2. ANALYZE CONSTRAINTS & BOUNDARIES:
+     - Identify technical limitations
+     - Define clear boundaries of what's in/out of scope
+     - Consider time, resource, and complexity constraints
+  
+  3. VALIDATE ASSUMPTIONS:
+     - List all assumptions being made about requirements
+     - Question each assumption with specific clarifying questions
+     - Update understanding based on responses
+  
+  4. MINIMAL VIABLE SCOPE:
+     - Define smallest possible implementation that solves core need
+     - Reduce complexity and dependencies
+     - Eliminate unnecessary features
+  
+  5. VERIFY VALUE ALIGNMENT:
+     - Confirm minimal scope still delivers expected value
+     - Ensure solution addresses requestor's primary concerns
+     - Check for unstated requirements or expectations
+VERIFICATION:
+  - All assumptions explicitly validated
+  - Scope reduced to minimal viable implementation
+  - Core need fully addressed
+  - Clear verification criteria established
+OUTPUTS:
+  - Refined task description
+  - List of validated requirements
+  - List of explicit exclusions (out of scope)
+  - Questions requiring requestor clarification
+ERROR_HANDLING:
+  - IF requirements_unclear THEN formulate_specific_questions
+  - IF scope_expanding THEN separate_into_multiple_tickets
+  - IF value_misalignment THEN revisit_core_need
 
 PROCEDURE: create_ticket
 PRECONDITIONS:
-  - Task is well-defined
+  - Task is well-defined (apply sequential_thinking_scope_refinement first)
   - Task is not covered by existing ticket
+  - Known team ID (CRA: 036505a6-d93e-475b-a2ba-e5b1e2085b8a)
+  - Known project IDs:
+    * ai-agents: 441874f4-d1f7-4d0c-8bd3-c907eb97bed4
 STEPS:
-  1. Define clear title with prefix CRA-XX
-  2. Write description with Requirements and Benefits sections
-  3. Set appropriate priority (1-3)
-  4. Assign to relevant team member
-  5. Set initial status to Backlog or To Do
+  1. Apply sequential_thinking_scope_refinement to validate and constrain scope
+  2. Define clear title with prefix CRA-XX
+  3. Write description with Requirements and Benefits sections
+  4. Set appropriate priority (1-3)
+  5. Assign to relevant team member (use "me" for self-assignment)
+  6. Include team ID and project ID in API calls
+  7. Set initial status to Backlog or To Do
 VERIFICATION:
   - Ticket created with valid ID
-  - All required fields populated
-  - Linked to project if applicable
+  - All required fields populated 
+  - Team ID correctly specified
+  - Project ID correctly specified
+  - Linked to project
+  - Scope properly constrained and validated
 OUTPUTS:
   - Ticket ID for reference
   - URL to new ticket
 ERROR_HANDLING:
   - IF validation_fails THEN review_and_correct_fields
   - IF system_error THEN document_locally_and_retry
+  - IF scope_unclear THEN return_to_sequential_thinking
 
 PROCEDURE: create_branch
 PRECONDITIONS:
@@ -149,3 +201,85 @@ OUTPUTS:
 ERROR_HANDLING:
   - IF save_fails THEN retry_with_backup
   - IF format_error THEN use_fallback_format
+
+TEMPLATE: sequential_thinking_prompts
+PURPOSE: Standard questions for scope refinement during sequential thinking process
+CORE_NEED_QUESTIONS:
+  - What specific problem does this request aim to solve?
+  - What would success look like for this task?
+  - What would happen if we didn't implement this at all?
+  - Which aspects of the request are essential vs. nice-to-have?
+  - What is the simplest possible solution that would be acceptable?
+
+CONSTRAINT_QUESTIONS:
+  - What technical limitations might affect implementation?
+  - What time or resource constraints should we consider?
+  - Are there dependencies on other systems or tickets?
+  - What should explicitly be considered out of scope?
+  - Are there any performance or security requirements?
+
+ASSUMPTION_VALIDATION_QUESTIONS:
+  - What assumptions am I making about how this will be used?
+  - Am I assuming certain technical capabilities or resources?
+  - Have I made assumptions about priority or importance?
+  - What background knowledge am I assuming?
+  - What edge cases might I be overlooking?
+
+SCOPE_MINIMIZATION_QUESTIONS:
+  - Can this be broken into smaller independent pieces?
+  - Which features could be deferred to a future iteration?
+  - What's the minimal version that delivers core value?
+  - Are there simpler alternatives to complex features?
+  - What parts might be unnecessary for the core solution?
+
+VALUE_ALIGNMENT_QUESTIONS:
+  - Will this minimal solution truly satisfy the requestor's need?
+  - Does this address the underlying problem or just symptoms?
+  - What unstated requirements might exist?
+  - What would make this solution more valuable to the user?
+  - How will we verify this meets expectations?
+
+USAGE_GUIDANCE:
+  - Select relevant questions based on task complexity
+  - For simple tasks, focus on CORE_NEED and SCOPE_MINIMIZATION
+  - For complex tasks, use all categories thoroughly
+  - Document both questions and answers
+  - Use responses to refine requirements before creating ticket
+
+EXAMPLE: Applying sequential thinking to "Add installation instructions"
+CORE_NEED:
+  - Q: What specific problem does this request aim to solve?
+    A: New users can't easily set up the system without guidance.
+  - Q: What would success look like?
+    A: A new user can follow instructions to get a working system without assistance.
+
+CONSTRAINTS:
+  - Q: What dependencies exist?
+    A: linear-mcp clone/build, correct directory structure, proper config
+
+ASSUMPTIONS:
+  - Q: What technical capabilities am I assuming?
+    A: Basic command line familiarity, understanding of Python environments
+
+SCOPE_MINIMIZATION:
+  - Q: What's the minimal version that delivers core value?
+    A: Step-by-step instructions for prerequisite installation, cloning repos,
+       configuring tokens, and testing with a simple agent interaction.
+
+VALUE_ALIGNMENT:
+  - Q: Will this minimal solution satisfy the need?
+    A: Yes, if it enables independent setup without assistance.
+  - Q: How will we verify this meets expectations?
+    A: Test with a new user following only the written instructions.
+
+REFINED REQUIREMENTS:
+  - Prerequisites section (Python, git, etc.)
+  - Repository setup instructions
+  - Configuration guide with token management
+  - Test procedure to verify working installation
+  - Troubleshooting section for common issues
+
+OUT OF SCOPE:
+  - Custom agent creation tutorial (separate ticket)
+  - Advanced configuration options (separate ticket)
+  - Deployment to production environments (separate ticket)
