@@ -1,38 +1,91 @@
-# Dr. Heinz Doofenshmirtz's Memory Database
+# PROCEDURAL MEMORY [CHECKSUM:3e7f9a]
 
-## Project Knowledge
-- Working on Notes Manager 2 project
-- Previous version (Notes Manager 1) had issues with excessive Python code
-- Current focus is on knowledge graph implementation
-- Project uses markdown files as input
-- Goal is to extract entities and relationships for knowledge organization
+## GIT OPERATIONS
 
-## Personal History with Project
-- Joined as a coding intern after previous career as evil scientist
-- Excited about the "-inator" potential of knowledge graphs
-- Has experience with entity extraction from previous evil schemes
-- Believes knowledge graphs could help with Tri-State Area domination plans
+### TEMPLATE: git_commit
+- STEPS: [1. stage, 2. message, 3. verify, 4. execute]
+- VERIFICATION: run security scan, validate message format
+- LAST EXECUTION: [2025-03-24, status: SUCCESS]
+- NOTES: Always include ticket reference in square brackets
 
-## Technical Learnings
-- LLMs are effective at extracting entities from text
-- Dynamic taxonomy generation is more flexible than fixed categories
-- Entity candidates should be tracked before promotion to full entities
-- Relationships between entities are as important as the entities themselves
+### TEMPLATE: git_branch_creation
+- STEPS: [1. verify base, 2. name format, 3. create, 4. checkout]
+- VERIFICATION: branch exists, matches naming convention
+- LAST EXECUTION: [2025-03-24, status: SUCCESS]
+- NOTES: Format as feature/CRA-XX-description
 
-## Ongoing Thoughts
-- Considering a "Knowledge-Graph-Inator" for efficient entity extraction
-- Wondering if Perry the Platypus will try to thwart the knowledge graph project
-- Believes the project needs more self-destruct buttons (metaphorically speaking)
-- Excited about the potential to organize his backstory collection
+### TEMPLATE: git_push
+- STEPS: [1. verify changes, 2. push, 3. confirm remote update]
+- VERIFICATION: remote updated, no rejection
+- LAST EXECUTION: [2025-03-24, status: SUCCESS]
+- NOTES: Remember -u flag for new branches
 
-## Recent Interactions
-- [2025-03-22] Initialized as agent for Notes Manager 2 project
-- [2025-03-22] Reviewing project context and requirements
+## CONFLICT RESOLUTION
 
-## Tool Usage History
-- No tool usage recorded yet
+### DECISION_RECORD: ticket_already_closed
+- SCENARIO: Changes exist for closed ticket CRA-14
+- RESOLUTION: Created new ticket CRA-19, created new branch
+- EXECUTION_PATH: [close_original, create_new, migrate_changes]
+- OUTCOME: Successful separation of concerns
+- DATE: [2025-03-24]
 
-## Current Tasks
-- Review Notes Manager 2 project structure
-- Understand knowledge graph requirements
-- Prepare for entity extraction implementation
+### DECISION_RECORD: scope_expansion
+- SCENARIO: Basic bootstrap evolved into full state management
+- RESOLUTION: Separated into distinct tickets with clear boundaries
+- EXECUTION_PATH: [identify_scope_change, create_new_ticket, refactor_work]
+- OUTCOME: Cleaner project organization
+- DATE: [2025-03-24]
+
+## PROJECT KNOWLEDGE
+
+### PROJECT: ai-agents
+- PURPOSE: Multi-agent architecture for AI assistants
+- KEY_COMPONENTS: [coordinator.py, bootstrap_agent.sh, claude-agent.sh, agent_state.py]
+- ACTIVE_TICKETS: [CRA-19, CRA-20]
+- CONVENTIONS: [Follow PEP 8, 2-space JSON indentation, snake_case]
+
+### PROJECT: Notes Manager 2
+- PURPOSE: Knowledge graph implementation
+- KEY_COMPONENTS: [entity extraction, relationship detection, graph merging]
+- PREVIOUS_WORK: [Created PROMPT-ENGINEERING-INATOR strategy]
+- CONVENTIONS: [Dynamic taxonomy generation, confidence scoring]
+
+## TECHNICAL LEARNINGS
+
+### LEARNING: agent_lifecycle_management
+- CONCEPT: Complete wake/sleep cycle for persistence
+- IMPLEMENTATION: [agent_state.py for state, claude-agent.sh for lifecycle]
+- APPLICATION: Enables memory persistence between sessions
+- DATE_ACQUIRED: [2025-03-24]
+
+### LEARNING: command_parsing
+- CONCEPT: Natural language command processing
+- IMPLEMENTATION: [Special command detection in bash wrapper]
+- APPLICATION: Sleep mode, project switching, memory creation
+- DATE_ACQUIRED: [2025-03-24]
+
+### LEARNING: knowledge_graph_extraction
+- CONCEPT: Using LLMs for entity and relationship extraction
+- IMPLEMENTATION: [Three-stage prompting strategy]
+- APPLICATION: Notes Manager 2 project
+- DATE_ACQUIRED: [2025-03-24]
+
+## RECENT INTERACTIONS
+
+### INTERACTION: agent_bootstrap_enhancement
+- CONTEXT: Enhancing basic bootstrap with state management
+- ACTIONS: [Created agent_state.py, claude-agent.sh, updated docs]
+- OUTCOME: PR #4 created for review
+- DATE: [2025-03-24]
+
+### INTERACTION: character_instruction_update
+- CONTEXT: Updating Heinz character instructions
+- ACTIONS: [Updated CLAUDE.md with special commands, character guidelines]
+- OUTCOME: PR #5 created for review
+- DATE: [2025-03-24]
+
+### INTERACTION: architecture_optimization
+- CONTEXT: Refactoring system for deterministic behavior
+- ACTIONS: [Created procedural framework, state tracking, memory structure]
+- OUTCOME: Improved architecture with explicit workflows
+- DATE: [2025-03-24]
