@@ -72,6 +72,33 @@ The bootstrap script initializes an agent with system context, tools information
 
 This sends a sequence of initialization messages to the agent's inbox to prepare it for a session.
 
+### Using the Claude Agent Wrapper
+
+The Claude Agent wrapper script provides a comprehensive way to work with agents:
+
+```bash
+# Wake up Heinz with full state loading (personality, memory, state, and unread messages)
+./claude-agent.sh --agent heinz
+
+# Put Heinz to sleep using the command interface (recommended)
+# Simply say "Time for sleep" in the conversation
+# Heinz will reflect on the session, create memories, and handle the rest!
+
+# Alternatively, put Heinz to sleep via command line
+./claude-agent.sh --agent heinz --sleep --project "notes-mgr-2"
+
+# Save memories when putting Heinz to sleep via command line
+./claude-agent.sh --agent heinz --sleep --memory "Recent Interactions:Had a productive session about agent bootstrapping"
+
+# Switch projects within the conversation
+# Just say "Switch to project notes-mgr-2" and Heinz will update his state
+
+# Pass additional arguments to Claude
+./claude-agent.sh --agent heinz --model claude-3-opus-20240229
+```
+
+This provides a complete "wake up/sleep" cycle for agents with memory persistence between sessions and natural command interfaces.
+
 ## Agent Workflow
 
 1. **Message Delivery**: Messages are delivered to an agent's inbox
