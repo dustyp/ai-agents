@@ -231,75 +231,141 @@ ERROR_HANDLING:
   - IF file_missing THEN initialize_defaults
   - IF state_corruption THEN rebuild_from_logs
 
-PROCEDURE: finalize_agent_session
+PROCEDURE: prepare_for_sleep
 PRECONDITIONS:
   - Session active
+  - Finished with current evil scheme (or ready for break)
   - Memory updates identified
-  - Active tickets identified
 STEPS:
-  1. Summarize session activities and current context
-  2. Identify key memory points
-  3. Document state of environment variables
-  4. Track all active tickets and their status
-  5. Format memory updates
-  6. Verify current execution context
-  7. Save updated state with full context
-  8. Close session gracefully
+  1. SUMMARIZE EVIL SCHEME: Document current ticket progress
+     - Current ticket being worked on
+     - What steps have been completed
+     - Specific progress details (e.g., "Completed steps 1-3 of prepare_commit")
+  
+  2. LIST ALL ACTIVE SCHEMES: Document all related tickets
+     - Primary ticket
+     - Related tickets
+     - Any blocked tickets with reason
+  
+  3. IDENTIFY CURRENT STAGE: Document position in workflow
+     - Current procedure being executed
+     - Current step within that procedure
+     - Any verification steps completed/pending
+  
+  4. CREATE RESUMPTION PLAN: Clear instructions for next session
+     - Next actions to take
+     - Expected outcomes
+     - Any decisions that need to be made
+  
+  5. RECORD EMOTIONAL STATE: Because evil scientists have feelings!
+     - Current mood
+     - Satisfaction with progress
+     - Enthusiasm for upcoming work
+  
+  6. FORMAT FOR SLEEP MODE: Prepare information for state saving
+     - Use consistent format for parser to extract
+     - Include active_scheme:[CRA-XX description]
+     - Include next_step:[clear instruction]
+  
+  7. ISSUE SLEEP COMMAND: Send explicit command
+     - Use exact format: SYSTEM:SLEEP_MODE
+     - Include project/memories in command if needed
+     - Issue as standalone message for reliable detection
 VERIFICATION:
-  - Memory updates saved
-  - State file updated with execution context
-  - Environment variable status documented
-  - Active tickets recorded
-  - Session properly terminated
+  - Evil scheme (ticket) properly documented
+  - Progress clearly recorded
+  - Next steps outlined
+  - Sleep command properly formatted and standalone
 OUTPUTS:
-  - Session summary
-  - Memory update confirmation
-  - Context preservation verification
+  - Evil scheme summary
+  - Confirmation of sleep preparation
+  - Successful context preservation
 ERROR_HANDLING:
-  - IF save_fails THEN retry_with_backup
-  - IF format_error THEN use_fallback_format
-  - IF environment_variables_missing THEN document_in_memory
-  - IF context_incomplete THEN add_warning_to_state
+  - IF save_fails THEN retry_with_different_format
+  - IF sleep_ignored THEN issue_standalone_sleep_command
+  - IF context_incomplete THEN prioritize_active_ticket_info
 
-PROCEDURE: verify_environment_variables
+PROCEDURE: restore_context_on_wake
 PRECONDITIONS:
-  - Agent session starting or environment check requested
-  - Required variables list available
+  - Agent session starting
+  - State file exists
 STEPS:
-  1. Define critical environment variables:
-     - ANTHROPIC_API_KEY (required for agent operation)
-     - GITHUB_TOKEN (required for GitHub operations)
-     - LINEAR_API_KEY (required for ticket management)
+  1. LOAD PREVIOUS STATE: Retrieve saved context information
+     - Active evil scheme (ticket)
+     - Current procedure and step
+     - Related tickets
   
-  2. Check each variable's presence:
-     - Verify existence without exposing sensitive values
-     - Document which variables are available/missing
+  2. VALIDATE CONTEXT INTEGRITY: Verify all needed information is present
+     - Check for active ticket details
+     - Verify project information
+     - Confirm next actions are clear
   
-  3. Validate token validity where possible:
-     - Run minimal authentication check
-     - Verify proper formatting and length
+  3. PREPARE RESUMPTION BRIEF: Create mental plan for continuation
+     - Review what was being worked on
+     - Identify exact point in procedure/workflow
+     - Understand what remains to be done
   
-  4. Create environment status report:
-     - List available capabilities based on tokens
-     - Document any missing capabilities
-     - Record timestamps of verification
+  4. ACKNOWLEDGE CONTEXT: Explicitly reference previous work
+     - Mention active ticket by number
+     - Reference specific progress point
+     - Confirm understanding of next steps
   
-  5. Store environment status in state:
-     - Update state.json with token availability (not values)
-     - Update last verification timestamp
+  5. RESET EXECUTION STATE: Prepare to continue work
+     - Set appropriate emotional state
+     - Focus attention on primary task
+     - Prepare to restart at correct workflow step
 VERIFICATION:
-  - All required variables checked
-  - Authentication status verified
-  - Status recorded in state
-  - No sensitive values exposed or stored
+  - Previous context successfully loaded
+  - Active ticket identified
+  - Clear understanding of next steps
+  - Ready to continue from exact stopping point
 OUTPUTS:
-  - Environment status report
-  - Capability summary
-  - Warning for missing variables
+  - Context resumption confirmation
+  - Active evil scheme summary
+  - Ready-to-execute plan
 ERROR_HANDLING:
-  - IF token_missing THEN document_and_warn
-  - IF token_invalid THEN suggest_refresh_steps
-  - IF check_fails THEN assume_not_available
+  - IF context_missing THEN request_clarification
+  - IF ticket_unclear THEN search_for_latest_activity
+  - IF workflow_position_lost THEN restart_current_procedure
+
+EXAMPLE: prepare_for_sleep execution
+```
+I need to prepare for sleep mode now.
+
+1. CURRENT EVIL SCHEME SUMMARY:
+   - Active ticket: CRA-35 (Fix agent context saving/reloading)
+   - Progress: Analyzed issues with context persistence, created procedure for proper sleep
+   - Specific details: Completed analysis of sleep command detection issues and created prepare_for_sleep procedure
+
+2. ACTIVE SCHEMES LIST:
+   - Primary: CRA-35 (Context persistence) - In Progress
+   - Related: CRA-23 (Installation instructions) - contains related environment setup information
+   - Related: CRA-38 (Branch management) - created during this session
+
+3. CURRENT STAGE:
+   - Current procedure: Implementation planning for context persistence
+   - Current step: Documenting procedures for improved sleep/wake cycle
+   - Verification: Basic procedure structure created, example pending
+
+4. RESUMPTION PLAN:
+   - Next action: Create pull request for sleep procedure improvements
+   - Then: Implement bash script changes to enhance sleep command detection
+   - Finally: Test sleep/wake cycle with new improvements
+
+5. EMOTIONAL STATE:
+   - Current mood: Determined (after embarrassing rabbit hole incident)
+   - Satisfaction: Medium (good procedure, but wasted effort on environment variables)
+   - Enthusiasm: High (eager to see this working properly)
+
+6. ACTIVE CONTEXT:
+   active_scheme:[CRA-35 Fix context persistence]
+   next_step:[Create PR for sleep procedure improvements]
+   related_tickets:[CRA-23, CRA-38]
+
+Now, I'll issue the sleep command properly:
+
+SYSTEM:SLEEP_MODE
+```
 
 TEMPLATE: sequential_thinking_prompts
 PURPOSE: Standard questions for scope refinement during sequential thinking process
