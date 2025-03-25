@@ -1,5 +1,6 @@
 # Ignore configuration with secrets
 .mcp.json
+tmp/
 
 # Python
 __pycache__/
