@@ -1,37 +1,49 @@
-# PROCEDURES LIBRARY [CHECKSUM:73b5c9]
+# PROCEDURES LIBRARY [CHECKSUM:e51f37]
 
 PROCEDURE: sequential_thinking_scope_refinement
 PRECONDITIONS:
   - Task request received
   - Initial understanding of requirements
 STEPS:
-  1. IDENTIFY CORE NEED: What fundamental problem is being solved?
+  1. SELECT INITIAL QUESTIONS:
+     - Choose 3 highest-impact questions relevant to the task
+     - Prioritize questions from CORE_NEED and SCOPE_MINIMIZATION
+     - Formulate questions clearly to maximize information gain
+  
+  2. IDENTIFY CORE NEED: What fundamental problem is being solved?
      - Strip away implementation details to find core requirement
      - Distinguish between essential vs. nice-to-have features
   
-  2. ANALYZE CONSTRAINTS & BOUNDARIES:
+  3. ANALYZE CONSTRAINTS & BOUNDARIES:
      - Identify technical limitations
      - Define clear boundaries of what's in/out of scope
      - Consider time, resource, and complexity constraints
   
-  3. VALIDATE ASSUMPTIONS:
-     - List all assumptions being made about requirements
-     - Question each assumption with specific clarifying questions
+  4. VALIDATE ASSUMPTIONS:
+     - List key assumptions being made about requirements
+     - Question critical assumptions with specific clarifying questions
      - Update understanding based on responses
   
-  4. MINIMAL VIABLE SCOPE:
+  5. MINIMAL VIABLE SCOPE:
      - Define smallest possible implementation that solves core need
      - Reduce complexity and dependencies
      - Eliminate unnecessary features
   
-  5. VERIFY VALUE ALIGNMENT:
+  6. VERIFY VALUE ALIGNMENT:
      - Confirm minimal scope still delivers expected value
      - Ensure solution addresses requestor's primary concerns
      - Check for unstated requirements or expectations
+  
+  7. EVALUATE AND ITERATE:
+     - Assess if initial questions provided sufficient clarity
+     - Add incremental questions only if critical aspects remain unclear
+     - Stop when additional questions would yield diminishing returns
 VERIFICATION:
-  - All assumptions explicitly validated
+  - Initial high-impact questions answered
+  - Question selection optimized for information gain
   - Scope reduced to minimal viable implementation
   - Core need fully addressed
+  - Question iteration stopped at appropriate point
   - Clear verification criteria established
 OUTPUTS:
   - Refined task description
@@ -240,9 +252,11 @@ VALUE_ALIGNMENT_QUESTIONS:
   - How will we verify this meets expectations?
 
 USAGE_GUIDANCE:
-  - Select relevant questions based on task complexity
-  - For simple tasks, focus on CORE_NEED and SCOPE_MINIMIZATION
-  - For complex tasks, use all categories thoroughly
+  - Start with only 3 highest-impact questions most relevant to the task
+  - Evaluate responses before deciding if more questions are needed
+  - Prioritize questions from CORE_NEED and SCOPE_MINIMIZATION first
+  - Add questions incrementally rather than all at once
+  - For very complex tasks, systematically work through categories
   - Document both questions and answers
   - Use responses to refine requirements before creating ticket
 
