@@ -1,4 +1,4 @@
-# PROCEDURAL MEMORY [CHECKSUM:b6e921]
+# PROCEDURAL MEMORY [CHECKSUM:e8f3c7]
 
 ## GIT OPERATIONS
 
@@ -42,7 +42,8 @@
 - PURPOSE: Multi-agent architecture for AI assistants
 - KEY_COMPONENTS: [coordinator.py, bootstrap_agent.sh, claude-agent.sh, agent_state.py]
 - PROJECT_ID: 441874f4-d1f7-4d0c-8bd3-c907eb97bed4
-- ACTIVE_TICKETS: [CRA-23, CRA-24, CRA-25, CRA-26, CRA-27, CRA-28, CRA-29, CRA-30, CRA-31, CRA-32]
+- ACTIVE_TICKETS: [CRA-23, CRA-24, CRA-25, CRA-27, CRA-28, CRA-29, CRA-30, CRA-31, CRA-32, CRA-33, CRA-35, CRA-36, CRA-37]
+- CLOSED_TICKETS: [CRA-26, CRA-34]
 - CONVENTIONS: [Follow PEP 8, 2-space JSON indentation, snake_case]
 
 ### PROJECT: Notes Manager 2
@@ -58,6 +59,14 @@
 - IMPLEMENTATION: [agent_state.py for state, claude-agent.sh for lifecycle]
 - APPLICATION: Enables memory persistence between sessions
 - DATE_ACQUIRED: [2025-03-24]
+- LIMITATIONS: [Environment variables not persisted, limited state tracking]
+
+### LEARNING: agent_context_persistence
+- CONCEPT: Comprehensive state preservation between sessions
+- IMPLEMENTATION: [Enhanced state management with credential tracking]
+- APPLICATION: Environment variable status, active ticket persistence, session continuity
+- DATE_ACQUIRED: [2025-03-25]
+- KEY_INSIGHT: State must include execution context, not just memory
 
 ### LEARNING: command_parsing
 - CONCEPT: Natural language command processing
@@ -101,4 +110,29 @@
 - CONTEXT: Enhancing ticket creation with scope refinement
 - ACTIONS: [Created sequential_thinking_scope_refinement procedure, updated ticket creation process]
 - OUTCOME: More rigorous requirements analysis and scope constraint
+- DATE: [2025-03-25]
+
+### INTERACTION: context_partitioning_issue
+- CONTEXT: Discussing procedure verification in multiple tickets
+- ACTIONS: [Identified incorrect context mixing, created CRA-33]
+- OUTCOME: New initiative to maintain better context boundaries
+- DATE: [2025-03-25]
+
+### INTERACTION: troubleshooting_simplification
+- CONTEXT: Overcomplicating GitHub authentication issue
+- ACTIONS: [Identified tendency to create complex solutions for simple problems]
+- OUTCOME: Learning to prioritize simple explanations and solutions first
+- DATE: [2025-03-25]
+
+### INTERACTION: context_persistence_failure
+- CONTEXT: Environment variables not persisting between agent sessions
+- ACTIONS: [Created CRA-35, analyzed agent_state.py and claude-agent.sh, documented implementation plan]
+- OUTCOME: Comprehensive understanding of state management limitations
+- LEARNING: Execution context must be preserved alongside memory
+- DATE: [2025-03-25]
+
+### INTERACTION: ticketing_workflow_improvements
+- CONTEXT: Improving Linear ticket workflow and management
+- ACTIONS: [Created tickets for status workflow (CRA-36) and priority persistence bug (CRA-37)]
+- OUTCOME: Better structure for ticket handling and status tracking
 - DATE: [2025-03-25]

@@ -1,4 +1,42 @@
-# PROCEDURES LIBRARY [CHECKSUM:e51f37]
+# PROCEDURES LIBRARY [CHECKSUM:1ae936]
+
+PROCEDURE: simplicity_first_troubleshooting
+PRECONDITIONS:
+  - Issue or error encountered
+  - Multiple possible explanations exist
+STEPS:
+  1. START WITH BASICS: Consider the simplest possible cause first
+     - Missing environment variables or configuration
+     - Permissions issues
+     - Simple syntax errors
+     - Common user patterns (manual vs. automated setup)
+  
+  2. VERIFY ENVIRONMENT: Check immediate context
+     - Environment variables relevant to the error
+     - Current working directory
+     - User permissions
+  
+  3. ESCALATE INCREMENTALLY: Only increase complexity as needed
+     - Start with local/session issues before system-wide
+     - Check single-user before multi-user concerns
+     - Verify simple configuration before checking complex integrations
+  
+  4. PROPOSE SIMPLE SOLUTIONS FIRST:
+     - Temporary environment variable setting
+     - Simple configuration changes
+     - Direct command-line fixes
+     - Only suggest complex solutions if simple ones are ruled out
+VERIFICATION:
+  - Simplest explanation considered first
+  - Environment context checked
+  - Incremental approach to diagnostic complexity
+  - Solutions match complexity of actual problem
+OUTPUTS:
+  - Diagnosis focusing on most likely/simplest cause
+  - Solution proportional to actual problem
+ERROR_HANDLING:
+  - IF simple_solutions_fail THEN increase diagnostic depth
+  - IF overthinking_detected THEN return to basics
 
 PROCEDURE: sequential_thinking_scope_refinement
 PRECONDITIONS:
@@ -197,22 +235,71 @@ PROCEDURE: finalize_agent_session
 PRECONDITIONS:
   - Session active
   - Memory updates identified
+  - Active tickets identified
 STEPS:
-  1. Summarize session activities
+  1. Summarize session activities and current context
   2. Identify key memory points
-  3. Format memory updates
-  4. Save updated state
-  5. Close session gracefully
+  3. Document state of environment variables
+  4. Track all active tickets and their status
+  5. Format memory updates
+  6. Verify current execution context
+  7. Save updated state with full context
+  8. Close session gracefully
 VERIFICATION:
   - Memory updates saved
-  - State file updated
+  - State file updated with execution context
+  - Environment variable status documented
+  - Active tickets recorded
   - Session properly terminated
 OUTPUTS:
   - Session summary
   - Memory update confirmation
+  - Context preservation verification
 ERROR_HANDLING:
   - IF save_fails THEN retry_with_backup
   - IF format_error THEN use_fallback_format
+  - IF environment_variables_missing THEN document_in_memory
+  - IF context_incomplete THEN add_warning_to_state
+
+PROCEDURE: verify_environment_variables
+PRECONDITIONS:
+  - Agent session starting or environment check requested
+  - Required variables list available
+STEPS:
+  1. Define critical environment variables:
+     - ANTHROPIC_API_KEY (required for agent operation)
+     - GITHUB_TOKEN (required for GitHub operations)
+     - LINEAR_API_KEY (required for ticket management)
+  
+  2. Check each variable's presence:
+     - Verify existence without exposing sensitive values
+     - Document which variables are available/missing
+  
+  3. Validate token validity where possible:
+     - Run minimal authentication check
+     - Verify proper formatting and length
+  
+  4. Create environment status report:
+     - List available capabilities based on tokens
+     - Document any missing capabilities
+     - Record timestamps of verification
+  
+  5. Store environment status in state:
+     - Update state.json with token availability (not values)
+     - Update last verification timestamp
+VERIFICATION:
+  - All required variables checked
+  - Authentication status verified
+  - Status recorded in state
+  - No sensitive values exposed or stored
+OUTPUTS:
+  - Environment status report
+  - Capability summary
+  - Warning for missing variables
+ERROR_HANDLING:
+  - IF token_missing THEN document_and_warn
+  - IF token_invalid THEN suggest_refresh_steps
+  - IF check_fails THEN assume_not_available
 
 TEMPLATE: sequential_thinking_prompts
 PURPOSE: Standard questions for scope refinement during sequential thinking process
