@@ -108,6 +108,28 @@ ERROR_HANDLING:
   - IF creation_fails THEN check_permissions_and_retry
   - IF validation_fails THEN update_PR_content
 
+PROCEDURE: handle_overlapping_prs
+PRECONDITIONS:
+  - Multiple PRs exist modifying same files
+  - PRs are on different branches
+STEPS:
+  1. Identify the dependency order between PRs
+  2. Create an integration branch from main
+  3. Apply changes sequentially based on dependency order
+  4. Resolve conflicts at each step
+  5. Run tests after integrating all changes
+  6. Create consolidated PR if appropriate
+VERIFICATION:
+  - All original features preserved
+  - No conflicts in final integration
+  - Tests passing after integration
+OUTPUTS:
+  - Integration branch name
+  - Consolidated PR URL
+ERROR_HANDLING:
+  - IF conflicting_changes_incompatible THEN escalate_to_team
+  - IF integration_fails THEN document_specific_conflicts
+
 PROCEDURE: initialize_agent_session
 PRECONDITIONS:
   - Agent files exist
