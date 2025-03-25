@@ -401,83 +401,92 @@ Now, I'll issue the sleep command properly:
 SYSTEM:SLEEP_MODE
 ```
 
-PROCEDURE: restore_session_state
+PROCEDURE: resume_last_session
 PRECONDITIONS:
-  - Received restore command (e.g., "/restore CRA-XX")
-  - MCP memory access available
+  - Received "resume" command/flag
+  - Agent has been initialized
 STEPS:
-  1. PARSE COMMAND: Extract ticket number from restore command
-     - Format: "/restore CRA-XX"
-     - Extract XX portion for session identification
+  1. IDENTIFY LATEST SESSION: Find most recent context
+     - Search for "latest_session" in MCP memory
+     - Check for "CURRENT_SESSION" tag in state.json
+     - Verify presence of session snapshot
   
-  2. RETRIEVE SESSION STATE: Query MCP memory for session data
-     - Search for entity named "SessionState-CRAXX"
-     - Extract all observations
+  2. LOAD CONTEXT: Retrieve session state
+     - Active tickets and priorities
+     - Current work status and progress
+     - Next planned actions
+     - Related context and dependencies
   
-  3. LOAD BRANCH CONTEXT: Check repository state
-     - Verify current branch matches stored branch
-     - If mismatch, note discrepancy for user
+  3. CHECK FOR CHANGES: Identify any new developments
+     - Compare repository state with saved state
+     - Check for new commits or PRs
+     - Look for ticket status changes
   
-  4. LOAD TICKET CONTEXT: Get current ticket details
-     - Retrieve ticket information from Linear
-     - Check for updates since last session
+  4. REBUILD MENTAL CONTEXT: Reconstruct working memory
+     - Recent conversations and decisions
+     - Important context from previous work
+     - Pending tasks and verification steps
   
-  5. RESTORE WORKING MEMORY: Prepare mental context
-     - Active ticket and progress
-     - Next actions planned
-     - Related tickets and dependencies
-  
-  6. ACKNOWLEDGE RESTORATION: Confirm to user
+  5. ACKNOWLEDGE RESUMPTION: Confirm to user
      - Summarize restored context
-     - Highlight any changes since snapshot
-     - Confirm ready to resume work
+     - Highlight main task being worked on
+     - Confirm ready to continue work
 VERIFICATION:
-  - Session state successfully retrieved
-  - Current context matches saved state
-  - Ready to continue from previous point
+  - Context successfully loaded
+  - Working state reconstructed
+  - Ready to resume from previous point
 OUTPUTS:
-  - Context restoration confirmation
-  - Summary of current task state
-  - Ready-to-execute plan
+  - Context resumption confirmation
+  - Current task summary
+  - Ready-to-execute next steps
 ERROR_HANDLING:
-  - IF state_not_found THEN request_ticket_details
-  - IF context_mismatch THEN highlight_differences
+  - IF no_session_found THEN acknowledge_new_session
+  - IF context_outdated THEN highlight_changes
   - IF restoration_incomplete THEN request_additional_information
 
-PROCEDURE: snapshot_session_state
+PROCEDURE: save_session_state
 PRECONDITIONS:
-  - Active work session
-  - Current ticket identified
+  - End of working session
+  - Active context to preserve
 STEPS:
-  1. COMPILE CRITICAL STATE: Gather essential context
-     - Active ticket and branch
-     - Progress summary
-     - Planned next steps
-     - Related tickets and dependencies
-     - Key files being worked on
+  1. COMPILE UNIVERSAL STATE: Gather essential context
+     - Current work focus (tickets, tasks, etc.)
+     - Progress status and blockers
+     - Next planned actions
+     - Key files and locations
+     - Related context needed for continuity
   
-  2. STORE IN MCP MEMORY: Create/update entity
-     - Entity name: "SessionState-CRAXX"
-     - Entity type: "SessionState"
-     - Include RESTORE_COMMAND for easy retrieval
+  2. FORMAT FOR PERSISTENCE: Structure for easy retrieval
+     - Create concise session summary
+     - Format as a structured key-value object
+     - Include timestamps and versioning
   
-  3. VERIFY STORAGE: Confirm state persisted
-     - Check entity exists in memory
-     - Verify all essential data captured
+  3. STORE IN MULTIPLE LOCATIONS: Ensure redundancy
+     - Update "latest_session" in MCP memory
+     - Save local context in session_state.md file
+     - Set "CURRENT_SESSION" in state.json
   
-  4. REPORT COMPLETION: Notify user
-     - Confirm state saved
-     - Provide restore command
+  4. VALIDATE STORAGE: Verify state is preserved
+     - Check each storage location
+     - Verify core context is captured
+     - Ensure retrieval methods will work
+  
+  5. SUMMARIZE FOR HUMAN: Create clear recap
+     - Provide concise session summary
+     - Highlight key accomplishments
+     - Outline next steps for next session
 VERIFICATION:
   - All critical context captured
-  - MCP memory entity successfully created
-  - Restore command generated
+  - State successfully persisted
+  - Easy to resume from this point
 OUTPUTS:
-  - Success confirmation
-  - Restore command for next session
+  - Session summary for human
+  - Confirmation of state preservation
+  - Clear next steps for resumption
 ERROR_HANDLING:
-  - IF storage_fails THEN retry_with_smaller_chunks
-  - IF context_incomplete THEN request_additional_information
+  - IF storage_fails THEN try_alternative_method
+  - IF context_too_large THEN prioritize_and_truncate
+  - IF missing_critical_info THEN prompt_for_details
 
 TEMPLATE: sequential_thinking_prompts
 PURPOSE: Standard questions for scope refinement during sequential thinking process
