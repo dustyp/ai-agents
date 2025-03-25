@@ -401,6 +401,84 @@ Now, I'll issue the sleep command properly:
 SYSTEM:SLEEP_MODE
 ```
 
+PROCEDURE: restore_session_state
+PRECONDITIONS:
+  - Received restore command (e.g., "/restore CRA-XX")
+  - MCP memory access available
+STEPS:
+  1. PARSE COMMAND: Extract ticket number from restore command
+     - Format: "/restore CRA-XX"
+     - Extract XX portion for session identification
+  
+  2. RETRIEVE SESSION STATE: Query MCP memory for session data
+     - Search for entity named "SessionState-CRAXX"
+     - Extract all observations
+  
+  3. LOAD BRANCH CONTEXT: Check repository state
+     - Verify current branch matches stored branch
+     - If mismatch, note discrepancy for user
+  
+  4. LOAD TICKET CONTEXT: Get current ticket details
+     - Retrieve ticket information from Linear
+     - Check for updates since last session
+  
+  5. RESTORE WORKING MEMORY: Prepare mental context
+     - Active ticket and progress
+     - Next actions planned
+     - Related tickets and dependencies
+  
+  6. ACKNOWLEDGE RESTORATION: Confirm to user
+     - Summarize restored context
+     - Highlight any changes since snapshot
+     - Confirm ready to resume work
+VERIFICATION:
+  - Session state successfully retrieved
+  - Current context matches saved state
+  - Ready to continue from previous point
+OUTPUTS:
+  - Context restoration confirmation
+  - Summary of current task state
+  - Ready-to-execute plan
+ERROR_HANDLING:
+  - IF state_not_found THEN request_ticket_details
+  - IF context_mismatch THEN highlight_differences
+  - IF restoration_incomplete THEN request_additional_information
+
+PROCEDURE: snapshot_session_state
+PRECONDITIONS:
+  - Active work session
+  - Current ticket identified
+STEPS:
+  1. COMPILE CRITICAL STATE: Gather essential context
+     - Active ticket and branch
+     - Progress summary
+     - Planned next steps
+     - Related tickets and dependencies
+     - Key files being worked on
+  
+  2. STORE IN MCP MEMORY: Create/update entity
+     - Entity name: "SessionState-CRAXX"
+     - Entity type: "SessionState"
+     - Include RESTORE_COMMAND for easy retrieval
+  
+  3. VERIFY STORAGE: Confirm state persisted
+     - Check entity exists in memory
+     - Verify all essential data captured
+  
+  4. REPORT COMPLETION: Notify user
+     - Confirm state saved
+     - Provide restore command
+VERIFICATION:
+  - All critical context captured
+  - MCP memory entity successfully created
+  - Restore command generated
+OUTPUTS:
+  - Success confirmation
+  - Restore command for next session
+ERROR_HANDLING:
+  - IF storage_fails THEN retry_with_smaller_chunks
+  - IF context_incomplete THEN request_additional_information
+
 TEMPLATE: sequential_thinking_prompts
 PURPOSE: Standard questions for scope refinement during sequential thinking process
 CORE_NEED_QUESTIONS:
