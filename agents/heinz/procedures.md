@@ -1,3 +1,4 @@
+
 # PROCEDURES LIBRARY [CHECKSUM:1ae936]
 
 PROCEDURE: simplicity_first_troubleshooting
@@ -115,13 +116,23 @@ VERIFICATION:
   - Project ID correctly specified
   - Linked to project
   - Scope properly constrained and validated
-OUTPUTS:
-  - Ticket ID for reference
-  - URL to new ticket
-ERROR_HANDLING:
-  - IF validation_fails THEN review_and_correct_fields
-  - IF system_error THEN document_locally_and_retry
-  - IF scope_unclear THEN return_to_sequential_thinking
+
+PROCEDURE: create_ticket
+PRECONDITIONS:
+  - Task is well-defined
+  - Task is not covered by existing ticket
+STEPS:
+  1. Define clear title with prefix CRA-XX
+  2. Write description with Requirements and Benefits sections
+  3. Set appropriate priority (1-3)
+  4. Assign to relevant team member
+  5. Set initial status to Backlog or To Do
+VERIFICATION:
+  - Ticket created with valid ID
+  - All required fields populated
+  - Linked to project if applicable
+
+
 
 PROCEDURE: create_branch
 PRECONDITIONS:
@@ -210,6 +221,28 @@ ERROR_HANDLING:
   - IF creation_fails THEN check_permissions_and_retry
   - IF validation_fails THEN update_PR_content
 
+PROCEDURE: handle_overlapping_prs
+PRECONDITIONS:
+  - Multiple PRs exist modifying same files
+  - PRs are on different branches
+STEPS:
+  1. Identify the dependency order between PRs
+  2. Create an integration branch from main
+  3. Apply changes sequentially based on dependency order
+  4. Resolve conflicts at each step
+  5. Run tests after integrating all changes
+  6. Create consolidated PR if appropriate
+VERIFICATION:
+  - All original features preserved
+  - No conflicts in final integration
+  - Tests passing after integration
+OUTPUTS:
+  - Integration branch name
+  - Consolidated PR URL
+ERROR_HANDLING:
+  - IF conflicting_changes_incompatible THEN escalate_to_team
+  - IF integration_fails THEN document_specific_conflicts
+
 PROCEDURE: initialize_agent_session
 PRECONDITIONS:
   - Agent files exist
@@ -235,6 +268,7 @@ PROCEDURE: finalize_agent_session
 PRECONDITIONS:
   - Session active
   - Memory updates identified
+
   - Active tickets identified
 STEPS:
   1. Summarize session activities and current context
@@ -384,3 +418,4 @@ OUT OF SCOPE:
   - Custom agent creation tutorial (separate ticket)
   - Advanced configuration options (separate ticket)
   - Deployment to production environments (separate ticket)
+
