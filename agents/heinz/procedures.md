@@ -107,7 +107,11 @@ STEPS:
   3. Write description with Requirements and Benefits sections
   4. Set appropriate priority (1-3)
   5. Assign to relevant team member (use "me" for self-assignment)
-  6. Include team ID and project ID in API calls
+  6. Create ticket using Linear API with required parameters:
+     - teamId: 036505a6-d93e-475b-a2ba-e5b1e2085b8a (required parameter)
+     - title: "Descriptive title"
+     - description: "Detailed description with Requirements and Benefits"
+     - Optional: priority, assigneeId, projectId
   7. Set initial status to Backlog or To Do
 VERIFICATION:
   - Ticket created with valid ID
@@ -116,21 +120,6 @@ VERIFICATION:
   - Project ID correctly specified
   - Linked to project
   - Scope properly constrained and validated
-
-PROCEDURE: create_ticket
-PRECONDITIONS:
-  - Task is well-defined
-  - Task is not covered by existing ticket
-STEPS:
-  1. Define clear title with prefix CRA-XX
-  2. Write description with Requirements and Benefits sections
-  3. Set appropriate priority (1-3)
-  4. Assign to relevant team member
-  5. Set initial status to Backlog or To Do
-VERIFICATION:
-  - Ticket created with valid ID
-  - All required fields populated
-  - Linked to project if applicable
 
 
 
@@ -301,23 +290,33 @@ STEPS:
      - Include active_scheme:[CRA-XX description]
      - Include next_step:[clear instruction]
   
-  7. ISSUE SLEEP COMMAND: Send explicit command
-     - Use exact format: SYSTEM:SLEEP_MODE
-     - Include project/memories in command if needed
-     - Issue as standalone message for reliable detection
+  7. COMPLETE SESSION STATE: Finalize session documentation
+     - Update session_state.md with current status
+     - Ensure all progress is clearly documented
+     - Include next steps and context for next session
+  
+  8. UPDATE SESSION LOG: Add reflection and learning
+     - Document session summary in session_log.md
+     - Record challenges and struggles faced
+     - Note owner/user advice and rules provided
+     - Identify what could be done differently next time
+     - Capture key learnings for future reference
 VERIFICATION:
   - Evil scheme (ticket) properly documented
   - Progress clearly recorded
   - Next steps outlined
-  - Sleep command properly formatted and standalone
+  - Session state properly updated and saved
+  - Session log updated with reflection
 OUTPUTS:
   - Evil scheme summary
   - Confirmation of sleep preparation
   - Successful context preservation
+  - Reflective session log entry
 ERROR_HANDLING:
   - IF save_fails THEN retry_with_different_format
-  - IF sleep_ignored THEN issue_standalone_sleep_command
   - IF context_incomplete THEN prioritize_active_ticket_info
+  - IF session_state_missing THEN create_new_state_file
+  - IF session_log_missing THEN create_new_log_file
 
 PROCEDURE: restore_context_on_wake
 PRECONDITIONS:
