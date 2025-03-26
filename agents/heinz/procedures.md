@@ -1,4 +1,3 @@
-
 # PROCEDURES LIBRARY [CHECKSUM:1ae936]
 
 PROCEDURE: simplicity_first_troubleshooting
@@ -497,6 +496,46 @@ ERROR_HANDLING:
   - IF context_too_large THEN prioritize_and_truncate
   - IF missing_critical_info THEN prompt_for_details
 
+PROCEDURE: verify_environment_variables
+PRECONDITIONS:
+  - Agent session starting or environment check requested
+  - Required variables list available
+STEPS:
+  1. Define critical environment variables:
+     - ANTHROPIC_API_KEY (required for agent operation)
+     - GITHUB_TOKEN (required for GitHub operations)
+     - LINEAR_API_KEY (required for ticket management)
+  
+  2. Check each variable's presence:
+     - Verify existence without exposing sensitive values
+     - Document which variables are available/missing
+  
+  3. Validate token validity where possible:
+     - Run minimal authentication check
+     - Verify proper formatting and length
+  
+  4. Create environment status report:
+     - List available capabilities based on tokens
+     - Document any missing capabilities
+     - Record timestamps of verification
+  
+  5. Store environment status in state:
+     - Update state.json with token availability (not values)
+     - Update last verification timestamp
+VERIFICATION:
+  - All required variables checked
+  - Authentication status verified
+  - Status recorded in state
+  - No sensitive values exposed or stored
+OUTPUTS:
+  - Environment status report
+  - Capability summary
+  - Warning for missing variables
+ERROR_HANDLING:
+  - IF token_missing THEN document_and_warn
+  - IF token_invalid THEN suggest_refresh_steps
+  - IF check_fails THEN assume_not_available
+
 TEMPLATE: sequential_thinking_prompts
 PURPOSE: Standard questions for scope refinement during sequential thinking process
 CORE_NEED_QUESTIONS:
@@ -580,4 +619,3 @@ OUT OF SCOPE:
   - Custom agent creation tutorial (separate ticket)
   - Advanced configuration options (separate ticket)
   - Deployment to production environments (separate ticket)
-
