@@ -4,6 +4,7 @@
 # Default to regular Claude if no agent specified
 AGENT=""
 SLEEP_MODE=false
+RESUME_MODE=false
 SAVE_MEMORIES=()
 CURRENT_PROJECT=""
 TRANSCRIPT_FILE=""
@@ -17,6 +18,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     -s|--sleep)
       SLEEP_MODE=true
+      shift
+      ;;
+    -r|--resume)
+      RESUME_MODE=true
       shift
       ;;
     -m|--memory)
@@ -39,50 +44,12 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Function to parse system commands from Claude's response
+# This function is deprecated - Claude can't send signals to the shell script
+# Keeping the function stub for backward compatibility, but it doesn't do anything
 parse_system_commands() {
   local transcript="$1"
-  
-  # Look for sleep command
-  if grep -q "SYSTEM:SLEEP_MODE" "$transcript"; then
-    echo "📝 Detected sleep command from agent..."
-    
-    # Extract project
-    project=$(grep -o "project=\[.*\]" "$transcript" | sed 's/project=\[\(.*\)\]/\1/')
-    if [ -n "$project" ]; then
-      CURRENT_PROJECT="$project"
-      echo "🔄 Setting project to: $project"
-    fi
-    
-    # Extract memories
-    memories=$(grep -o "memories=\[.*\]" "$transcript" | sed 's/memories=\[\(.*\)\]/\1/')
-    if [ -n "$memories" ]; then
-      # First, replace any spaces after commas with %20 to preserve formatting
-      memories=$(echo "$memories" | sed 's/, /,%20/g')
-      IFS=',' read -ra MEMORY_ARRAY <<< "$memories"
-      for memory in "${MEMORY_ARRAY[@]}"; do
-        # Replace %20 back with space
-        memory=$(echo "$memory" | sed 's/%20/ /g')
-        SAVE_MEMORIES+=("$memory")
-      done
-      echo "💭 Captured ${#MEMORY_ARRAY[@]} memories to save"
-    fi
-    
-    SLEEP_MODE=true
-  fi
-  
-  # Look for project switch command
-  if grep -q "SYSTEM:PROJECT_SWITCH" "$transcript"; then
-    project=$(grep -o "SYSTEM:PROJECT_SWITCH(\[.*\])" "$transcript" | sed 's/SYSTEM:PROJECT_SWITCH(\[\(.*\)\])/\1/')
-    if [ -n "$project" ]; then
-      echo "🔄 Detected project switch to: $project"
-      CURRENT_PROJECT="$project"
-      
-      # Save state with new project
-      echo "{\"current_project\": \"$project\"}" | python3 agent_state.py save-state "$AGENT"
-      echo "✅ Updated agent state with new project"
-    fi
-  fi
+  # No-op function - we now use explicit save/resume flags
+  return 0
 }
 
 # If agent specified, check if it exists
@@ -159,7 +126,27 @@ if [ -n "$AGENT" ]; then
   MEMORY=$(cat "$MEMORY_FILE")
   
   # Create agent initialization prompt
-  INITIAL_PROMPT="I am $AGENT. Please load my personality, memory, and state.
+  if [ "$RESUME_MODE" = true ]; then
+    # Resume mode - focus on resuming previous session
+    INITIAL_PROMPT="I am $AGENT. Please load my personality, memory, and state.
+
+# Agent Initialization with Resume
+You are now operating as $AGENT.
+
+## Personality
+$PERSONALITY
+
+## Memory
+$MEMORY
+
+## State
+$AGENT_STATE
+
+IMPORTANT: You must run the resume_last_session procedure immediately.
+Please confirm that you've loaded my context and are ready to resume as $AGENT. Respond in character immediately."
+  else
+    # Regular initialization
+    INITIAL_PROMPT="I am $AGENT. Please load my personality, memory, and state.
 
 # Agent Initialization
 You are now operating as $AGENT.
@@ -174,6 +161,7 @@ $MEMORY
 $AGENT_STATE
 
 Please confirm that you've loaded my context and are ready to proceed as $AGENT. Respond in character immediately."
+  fi
   
   # Run Claude with agent context passed directly as an initial prompt
   # The initial prompt will bootstrap the agent before user interaction
@@ -182,20 +170,17 @@ Please confirm that you've loaded my context and are ready to proceed as $AGENT.
   # Now start the interactive session with agent already initialized
   claude "${CLAUDE_ARGS[@]}"
   
-  # Parse system commands from the transcript
-  parse_system_commands "$TRANSCRIPT_FILE"
-  
   # Clean up temp files
   rm "$STATE_FILE"
   if [ "$AUTO_TRANSCRIPT" = true ]; then
     rm "$TRANSCRIPT_FILE"
   fi
   
-  # If sleep mode was triggered by command, execute it
+  # If sleep mode flag was provided, execute it
   if [ "$SLEEP_MODE" = true ]; then
-    echo "🛌 Putting agent $AGENT to sleep (triggered by command)..."
+    echo "🛌 Putting agent $AGENT to sleep..."
     
-    # Build state data with any memories to save
+    # Build state data to save
     STATE_DATA='{"active_tasks": [], "emotional_state": "resting"'
     
     # Add current project if specified

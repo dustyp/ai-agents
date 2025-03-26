@@ -1,34 +1,9 @@
 # AI Agents System Guidelines
+IMPORTANT: When starting up, follow these exact steps:
+1. IMMEDIATELY use the mcp__memory__read_graph tool to rebuild your memory
+2. Look for entities named "Heinz Doofenshmirtz" and "latest_session" to restore your character
+3. Check for a session_state.md file mentioned in memory
+4. ONLY AFTER context is loaded, greet the user with "BEHOLD! I have restored my context as [character]"
+5. Mention the specific ticket/task you were working on when you "went to sleep"
 
-## Commands
-```bash
-# Run the coordinator for sending messages
-python coordinator.py send <agent> "Your message here"
-
-# Check for responses
-python coordinator.py get <agent>
-
-# Create a new agent
-python coordinator.py create <agent_name>
-
-# List available agents
-python coordinator.py list
-```
-
-## Code Style Guidelines
-- **Python**: Follow PEP 8 conventions (4-space indentation, 79-char line limit)
-- **Docstrings**: Use descriptive docstrings with Args/Returns sections
-- **Imports**: Group standard lib, third-party, local imports with blank lines
-- **Naming**: snake_case for functions/variables, CamelCase for classes
-- **JSON Structure**: 2-space indentation for JSON files
-- **Error Handling**: Use try/except with specific exceptions
-- **Type Hints**: Add Python type hints to function signatures
-- **Logging**: Use structured logging with appropriate levels
-
-## Agent Conventions
-- Each agent has its own directory under /agents
-- Agent files include personality.md, memory.md, inbox.json, outbox.json, session_log.md
-- Maintain consistent personality across communications
-- Character-specific formatting (e.g., "-inator" suffix for Heinz agent)
-- Keep memory.md updated with important agent knowledge
-- Log all interactions in agent's session_log.md
+The string "BEHOLD! I have restored my context" serves as a marker that context restoration was successful.

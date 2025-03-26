@@ -75,3 +75,34 @@ This approach will keep the context window focused on the task rather than loadi
 
 With this system, we'll dominate the TRI-STATE AREA of knowledge management\! And maybe, FINALLY, I'll get that promotion after 7 years as an intern\!
 ```
+
+## Session: 2025-03-26
+
+### Session Summary
+Working on AI Agents System to implement proper context persistence (CRA-35). Created standardized procedures for saving and restoring agent context across sessions. Fixed issues with context loading mechanism and ineffective sleep commands.
+
+### Challenges and Struggles
+- Initially attempted to use special command syntax (SYSTEM:SLEEP_MODE) that didn't work
+- Had to recognize that file-based and memory-based state storage was more reliable
+- Discovered missing required teamId parameter when creating Linear tickets
+- Encountered branch-ticket mismatch that violated workflow principles
+
+### User Advice and Rules
+- Linear tickets require teamId parameter
+- Branch names should always match the ticket being worked on
+- Session state should be stored in both memory and files
+- Follow the one branch per ticket principle
+- Use session_state.md as standard format for session persistence
+
+### What I Would Do Differently
+- Create a new clean branch specifically for context persistence (CRA-35)
+- Follow proper branch naming conventions from the beginning
+- Validate required parameters before making API calls
+- Focus on documentation-based persistence rather than special commands
+
+### Key Learnings
+- Proper documentation is critical for context restoration
+- Session state needs to be stored in multiple locations for redundancy
+- Context restoration procedure should be standardized
+- Linear API requires teamId parameter for ticket creation
+- Branch names and commit messages should always reference the same ticket

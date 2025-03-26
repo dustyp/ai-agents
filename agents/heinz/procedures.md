@@ -1,4 +1,3 @@
-
 # PROCEDURES LIBRARY [CHECKSUM:1ae936]
 
 PROCEDURE: simplicity_first_troubleshooting
@@ -107,7 +106,11 @@ STEPS:
   3. Write description with Requirements and Benefits sections
   4. Set appropriate priority (1-3)
   5. Assign to relevant team member (use "me" for self-assignment)
-  6. Include team ID and project ID in API calls
+  6. Create ticket using Linear API with required parameters:
+     - teamId: 036505a6-d93e-475b-a2ba-e5b1e2085b8a (required parameter)
+     - title: "Descriptive title"
+     - description: "Detailed description with Requirements and Benefits"
+     - Optional: priority, assigneeId, projectId
   7. Set initial status to Backlog or To Do
 VERIFICATION:
   - Ticket created with valid ID
@@ -116,21 +119,6 @@ VERIFICATION:
   - Project ID correctly specified
   - Linked to project
   - Scope properly constrained and validated
-
-PROCEDURE: create_ticket
-PRECONDITIONS:
-  - Task is well-defined
-  - Task is not covered by existing ticket
-STEPS:
-  1. Define clear title with prefix CRA-XX
-  2. Write description with Requirements and Benefits sections
-  3. Set appropriate priority (1-3)
-  4. Assign to relevant team member
-  5. Set initial status to Backlog or To Do
-VERIFICATION:
-  - Ticket created with valid ID
-  - All required fields populated
-  - Linked to project if applicable
 
 
 
@@ -264,36 +252,249 @@ ERROR_HANDLING:
   - IF file_missing THEN initialize_defaults
   - IF state_corruption THEN rebuild_from_logs
 
-PROCEDURE: finalize_agent_session
+PROCEDURE: prepare_for_sleep
 PRECONDITIONS:
   - Session active
+  - Finished with current evil scheme (or ready for break)
   - Memory updates identified
-
   - Active tickets identified
 STEPS:
-  1. Summarize session activities and current context
-  2. Identify key memory points
-  3. Document state of environment variables
-  4. Track all active tickets and their status
-  5. Format memory updates
-  6. Verify current execution context
-  7. Save updated state with full context
-  8. Close session gracefully
+  1. SUMMARIZE EVIL SCHEME: Document current ticket progress
+     - Current ticket being worked on
+     - What steps have been completed
+     - Specific progress details (e.g., "Completed steps 1-3 of prepare_commit")
+  
+  2. LIST ALL ACTIVE SCHEMES: Document all related tickets
+     - Primary ticket
+     - Related tickets
+     - Any blocked tickets with reason
+  
+  3. IDENTIFY CURRENT STAGE: Document position in workflow
+     - Current procedure being executed
+     - Current step within that procedure
+     - Any verification steps completed/pending
+  
+  4. CREATE RESUMPTION PLAN: Clear instructions for next session
+     - Next actions to take
+     - Expected outcomes
+     - Any decisions that need to be made
+  
+  5. RECORD EMOTIONAL STATE: Because evil scientists have feelings!
+     - Current mood
+     - Satisfaction with progress
+     - Enthusiasm for upcoming work
+  
+  6. FORMAT FOR SLEEP MODE: Prepare information for state saving
+     - Use consistent format for parser to extract
+     - Include active_scheme:[CRA-XX description]
+     - Include next_step:[clear instruction]
+  
+  7. COMPLETE SESSION STATE: Finalize session documentation
+     - Update session_state.md with current status
+     - Ensure all progress is clearly documented
+     - Include next steps and context for next session
+  
+  8. UPDATE SESSION LOG: Add reflection and learning
+     - Document session summary in session_log.md
+     - Record challenges and struggles faced
+     - Note owner/user advice and rules provided
+     - Identify what could be done differently next time
+     - Capture key learnings for future reference
 VERIFICATION:
-  - Memory updates saved
-  - State file updated with execution context
-  - Environment variable status documented
-  - Active tickets recorded
-  - Session properly terminated
+  - Evil scheme (ticket) properly documented
+  - Progress clearly recorded
+  - Next steps outlined
+  - Session state properly updated and saved
+  - Session log updated with reflection
 OUTPUTS:
-  - Session summary
-  - Memory update confirmation
-  - Context preservation verification
+  - Evil scheme summary
+  - Confirmation of sleep preparation
+  - Successful context preservation
+  - Reflective session log entry
 ERROR_HANDLING:
-  - IF save_fails THEN retry_with_backup
-  - IF format_error THEN use_fallback_format
-  - IF environment_variables_missing THEN document_in_memory
-  - IF context_incomplete THEN add_warning_to_state
+  - IF save_fails THEN retry_with_different_format
+  - IF context_incomplete THEN prioritize_active_ticket_info
+  - IF session_state_missing THEN create_new_state_file
+  - IF session_log_missing THEN create_new_log_file
+
+PROCEDURE: restore_context_on_wake
+PRECONDITIONS:
+  - Agent session starting
+  - State file exists
+STEPS:
+  1. LOAD PREVIOUS STATE: Retrieve saved context information
+     - Active evil scheme (ticket)
+     - Current procedure and step
+     - Related tickets
+  
+  2. VALIDATE CONTEXT INTEGRITY: Verify all needed information is present
+     - Check for active ticket details
+     - Verify project information
+     - Confirm next actions are clear
+  
+  3. PREPARE RESUMPTION BRIEF: Create mental plan for continuation
+     - Review what was being worked on
+     - Identify exact point in procedure/workflow
+     - Understand what remains to be done
+  
+  4. ACKNOWLEDGE CONTEXT: Explicitly reference previous work
+     - Mention active ticket by number
+     - Reference specific progress point
+     - Confirm understanding of next steps
+  
+  5. RESET EXECUTION STATE: Prepare to continue work
+     - Set appropriate emotional state
+     - Focus attention on primary task
+     - Prepare to restart at correct workflow step
+VERIFICATION:
+  - Previous context successfully loaded
+  - Active ticket identified
+  - Clear understanding of next steps
+  - Ready to continue from exact stopping point
+OUTPUTS:
+  - Context resumption confirmation
+  - Active evil scheme summary
+  - Ready-to-execute plan
+ERROR_HANDLING:
+  - IF context_missing THEN request_clarification
+  - IF ticket_unclear THEN search_for_latest_activity
+  - IF workflow_position_lost THEN restart_current_procedure
+
+EXAMPLE: prepare_for_sleep execution
+```
+I need to prepare for sleep mode now.
+
+1. CURRENT EVIL SCHEME SUMMARY:
+   - Active ticket: CRA-35 (Fix agent context saving/reloading)
+   - Progress: Analyzed issues with context persistence, created procedure for proper sleep
+   - Specific details: Completed analysis of sleep command detection issues and created prepare_for_sleep procedure
+
+2. ACTIVE SCHEMES LIST:
+   - Primary: CRA-35 (Context persistence) - In Progress
+   - Related: CRA-23 (Installation instructions) - contains related environment setup information
+   - Related: CRA-38 (Branch management) - created during this session
+
+3. CURRENT STAGE:
+   - Current procedure: Implementation planning for context persistence
+   - Current step: Documenting procedures for improved sleep/wake cycle
+   - Verification: Basic procedure structure created, example pending
+
+4. RESUMPTION PLAN:
+   - Next action: Create pull request for sleep procedure improvements
+   - Then: Implement bash script changes to enhance sleep command detection
+   - Finally: Test sleep/wake cycle with new improvements
+
+5. EMOTIONAL STATE:
+   - Current mood: Determined (after embarrassing rabbit hole incident)
+   - Satisfaction: Medium (good procedure, but wasted effort on environment variables)
+   - Enthusiasm: High (eager to see this working properly)
+
+6. ACTIVE CONTEXT:
+   active_scheme:[CRA-35 Fix context persistence]
+   next_step:[Create PR for sleep procedure improvements]
+   related_tickets:[CRA-23, CRA-38]
+
+Now, I'll issue the sleep command properly:
+
+SYSTEM:SLEEP_MODE
+```
+
+PROCEDURE: resume_last_session
+PRECONDITIONS:
+  - Received "resume" command/flag
+  - Agent has been initialized
+STEPS:
+  1. IDENTIFY LATEST SESSION: Find most recent context
+     - Search for "latest_session" in MCP memory
+     - Check for "CURRENT_SESSION" tag in state.json
+     - Verify presence of session snapshot
+  
+  2. LOAD CONTEXT: Retrieve session state
+     - Active tickets and priorities
+     - Current work status and progress
+     - Next planned actions
+     - Related context and dependencies
+  
+  3. CHECK FOR CHANGES: Identify any new developments
+     - Compare repository state with saved state
+     - Check for new commits or PRs
+     - Look for ticket status changes
+  
+  4. REBUILD MENTAL CONTEXT: Reconstruct working memory
+     - Recent conversations and decisions
+     - Important context from previous work
+     - Pending tasks and verification steps
+  
+  5. ACKNOWLEDGE RESUMPTION: Confirm to user
+     - Summarize restored context
+     - Highlight main task being worked on
+     - Confirm ready to continue work
+VERIFICATION:
+  - Context successfully loaded
+  - Working state reconstructed
+  - Ready to resume from previous point
+OUTPUTS:
+  - Context resumption confirmation
+  - Current task summary
+  - Ready-to-execute next steps
+ERROR_HANDLING:
+  - IF no_session_found THEN acknowledge_new_session
+  - IF context_outdated THEN highlight_changes
+  - IF restoration_incomplete THEN request_additional_information
+
+PROCEDURE: save_session_state
+PRECONDITIONS:
+  - End of working session
+  - Active context to preserve
+STEPS:
+  1. COMPILE UNIVERSAL STATE: Gather essential context
+     - Current work focus (tickets, tasks, etc.)
+     - Progress status and blockers
+     - Next planned actions
+     - Key files and locations
+     - Related context needed for continuity
+  
+  2. FORMAT FOR PERSISTENCE: Structure for easy retrieval
+     - Create standardized session_state.md format
+     - Include clearly labeled sections:
+       * TIMESTAMP (with ISO-8601 format)
+       * ACTIVE WORK (focus, branch, status)
+       * PROGRESS (completed items, current state)
+       * NEXT STEPS (prioritized actions)
+       * RELATED CONTEXT (other tickets, PRs)
+       * KEY FILES (important modified files)
+       * MENTAL STATE (approach, learnings)
+       * RESUMPTION NOTES (command to use)
+     - Include version number (e.g., FORMAT_VERSION: 1.1)
+  
+  3. STORE IN MULTIPLE LOCATIONS: Ensure redundancy
+     - Update "latest_session" entity in MCP memory with same details
+     - Save local context in session_state.md file
+     - Set "CURRENT_SESSION" in state.json if needed
+  
+  4. VALIDATE STORAGE: Verify state is preserved
+     - Check each storage location
+     - Verify core context is captured
+     - Ensure retrieval methods will work
+  
+  5. SUMMARIZE FOR HUMAN: Create clear recap
+     - Provide concise session summary
+     - Highlight key accomplishments
+     - Outline next steps for next session
+     - Include exact command for resuming: `claude -a heinz -r`
+VERIFICATION:
+  - All critical context captured
+  - State successfully persisted
+  - Easy to resume from this point
+  - Command for resumption is clear
+OUTPUTS:
+  - Session summary for human
+  - Confirmation of state preservation
+  - Clear next steps for resumption
+ERROR_HANDLING:
+  - IF storage_fails THEN try_alternative_method
+  - IF context_too_large THEN prioritize_and_truncate
+  - IF missing_critical_info THEN prompt_for_details
 
 PROCEDURE: verify_environment_variables
 PRECONDITIONS:
@@ -418,4 +619,3 @@ OUT OF SCOPE:
   - Custom agent creation tutorial (separate ticket)
   - Advanced configuration options (separate ticket)
   - Deployment to production environments (separate ticket)
-
