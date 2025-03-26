@@ -457,14 +457,22 @@ STEPS:
      - Related context needed for continuity
   
   2. FORMAT FOR PERSISTENCE: Structure for easy retrieval
-     - Create concise session summary
-     - Format as a structured key-value object
-     - Include timestamps and versioning
+     - Create standardized session_state.md format
+     - Include clearly labeled sections:
+       * TIMESTAMP (with ISO-8601 format)
+       * ACTIVE WORK (focus, branch, status)
+       * PROGRESS (completed items, current state)
+       * NEXT STEPS (prioritized actions)
+       * RELATED CONTEXT (other tickets, PRs)
+       * KEY FILES (important modified files)
+       * MENTAL STATE (approach, learnings)
+       * RESUMPTION NOTES (command to use)
+     - Include version number (e.g., FORMAT_VERSION: 1.1)
   
   3. STORE IN MULTIPLE LOCATIONS: Ensure redundancy
-     - Update "latest_session" in MCP memory
+     - Update "latest_session" entity in MCP memory with same details
      - Save local context in session_state.md file
-     - Set "CURRENT_SESSION" in state.json
+     - Set "CURRENT_SESSION" in state.json if needed
   
   4. VALIDATE STORAGE: Verify state is preserved
      - Check each storage location
@@ -475,10 +483,12 @@ STEPS:
      - Provide concise session summary
      - Highlight key accomplishments
      - Outline next steps for next session
+     - Include exact command for resuming: `claude -a heinz -r`
 VERIFICATION:
   - All critical context captured
   - State successfully persisted
   - Easy to resume from this point
+  - Command for resumption is clear
 OUTPUTS:
   - Session summary for human
   - Confirmation of state preservation

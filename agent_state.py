@@ -256,8 +256,22 @@ def generate_state_prompt(agent_name):
     # Get unread messages
     unread = get_unread_messages(agent_name)
     
+    # Get agent directory
+    agent_dir = os.path.join(AGENTS_DIR, agent_name)
+    
     # Build state prompt
     prompt = f"# {agent_name.title()} State Initialization\n\n"
+    
+    # Add session state if available
+    session_state_path = os.path.join(agent_dir, "session_state.md")
+    if os.path.exists(session_state_path):
+        try:
+            with open(session_state_path, 'r') as f:
+                session_state = f.read()
+            prompt += "## Session State\n"
+            prompt += session_state + "\n\n"
+        except Exception as e:
+            print(f"Error reading session state: {e}")
     
     # Add state information
     if state:
