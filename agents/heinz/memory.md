@@ -21,6 +21,12 @@
 - LAST EXECUTION: [2025-03-24, status: SUCCESS]
 - NOTES: Remember -u flag for new branches
 
+### TEMPLATE: git_branch_cleanup
+- STEPS: [1. analyze branches, 2. identify merged branches, 3. delete local, 4. delete remote]
+- VERIFICATION: branches removed both locally and remotely
+- LAST EXECUTION: [2025-03-26, status: SUCCESS]
+- NOTES: Use git branch -d for merged, git branch -D for unmerged but obsolete
+
 ## CONFLICT RESOLUTION
 
 ### DECISION_RECORD: ticket_already_closed
@@ -37,14 +43,21 @@
 - OUTCOME: Cleaner project organization
 - DATE: [2025-03-24]
 
+### DECISION_RECORD: branch_cleanup
+- SCENARIO: Multiple stale branches creating confusion in repository
+- RESOLUTION: Analyzed and deleted all branches with work in main or superseded
+- EXECUTION_PATH: [analyze_branches, identify_merged, remove_superseded, document_actions]
+- OUTCOME: Clean repository with only main branch remaining
+- DATE: [2025-03-26]
+
 ## PROJECT KNOWLEDGE
 
 ### PROJECT: ai-agents
 - PURPOSE: Multi-agent architecture for AI assistants
 - KEY_COMPONENTS: [coordinator.py, bootstrap_agent.sh, claude-agent.sh, agent_state.py]
 - PROJECT_ID: 441874f4-d1f7-4d0c-8bd3-c907eb97bed4
-- ACTIVE_TICKETS: [CRA-23, CRA-24, CRA-25, CRA-27, CRA-28, CRA-29, CRA-30, CRA-31, CRA-32, CRA-33, CRA-35, CRA-36, CRA-37]
-- CLOSED_TICKETS: [CRA-26, CRA-34]
+- ACTIVE_TICKETS: [CRA-23, CRA-24, CRA-25, CRA-27, CRA-28, CRA-29, CRA-30, CRA-31, CRA-32, CRA-33, CRA-36, CRA-37]
+- CLOSED_TICKETS: [CRA-14, CRA-19, CRA-20, CRA-21, CRA-22, CRA-26, CRA-34, CRA-35]
 - CONVENTIONS: [Follow PEP 8, 2-space JSON indentation, snake_case]
 
 ### PROJECT: Notes Manager 2
@@ -87,6 +100,13 @@
 - APPLICATION: Ticket creation, requirement engineering
 - DATE_ACQUIRED: [2025-03-25]
 
+### LEARNING: git_branch_management
+- CONCEPT: Structured approach to managing git branches
+- IMPLEMENTATION: [Analysis, categorization, and cleanup process]
+- APPLICATION: Repository organization and maintenance
+- DATE_ACQUIRED: [2025-03-26]
+- KEY_INSIGHT: Regular branch cleanup prevents repository bloat and confusion
+
 ## RECENT INTERACTIONS
 
 ### INTERACTION: agent_bootstrap_enhancement
@@ -113,28 +133,38 @@
 - OUTCOME: More rigorous requirements analysis and scope constraint
 - DATE: [2025-03-25]
 
-### INTERACTION: context_partitioning_issue
-- CONTEXT: Discussing procedure verification in multiple tickets
-- ACTIONS: [Identified incorrect context mixing, created CRA-33]
-- OUTCOME: New initiative to maintain better context boundaries
-- DATE: [2025-03-25]
+### INTERACTION: context_persistence_implementation
+- CONTEXT: Implementing agent context persistence across sessions
+- ACTIONS: [Created standardized procedures for saving/restoring context, updated session_state.md format]
+- OUTCOME: Successful implementation of context persistence mechanism
+- DATE: [2025-03-26]
 
-### INTERACTION: troubleshooting_simplification
-- CONTEXT: Overcomplicating GitHub authentication issue
-- ACTIONS: [Identified tendency to create complex solutions for simple problems]
-- OUTCOME: Learning to prioritize simple explanations and solutions first
-- DATE: [2025-03-25]
+### INTERACTION: git_branch_cleanup
+- CONTEXT: Repository organization and branch cleanup
+- ACTIONS: [Analyzed branch status, deleted merged/superseded branches, documented process]
+- OUTCOME: Clean repository with only main branch remaining
+- LEARNING: Importance of regular branch maintenance and proper branch naming
+- DATE: [2025-03-26]
 
-### INTERACTION: context_persistence_failure
-- CONTEXT: Environment variables not persisting between agent sessions
-- ACTIONS: [Created CRA-35, analyzed agent_state.py and claude-agent.sh, documented implementation plan]
-- OUTCOME: Comprehensive understanding of state management limitations
-- LEARNING: Execution context must be preserved alongside memory
-- DATE: [2025-03-25]
+### INTERACTION: repository_structure_analysis
+- CONTEXT: Understanding git branch relationships and PR workflow
+- ACTIONS: [Analyzed commit history, tracked branch relationships, identified merge patterns]
+- OUTCOME: Clear understanding of PR workflow and branch management needs
+- LEARNING: Branch divergence can cause confusion without proper tracking
+- DATE: [2025-03-26]
 
-### INTERACTION: ticketing_workflow_improvements
-- CONTEXT: Improving Linear ticket workflow and management
-- ACTIONS: [Created tickets for status workflow (CRA-36) and priority persistence bug (CRA-37)]
-- OUTCOME: Better structure for ticket handling and status tracking
-- DATE: [2025-03-25]
+### INTERACTION: procedure_visualization_implementation
+- CONTEXT: Adding visual indicators to procedure execution
+- ACTIONS: [Added visualization examples to 7 key procedures, updated documentation]
+- OUTCOME: Standardized visualization format for procedure execution
+- LEARNING: Visual progress indicators improve procedure execution clarity
+- DATE: [2025-03-29]
+
+### INTERACTION: procedural_violation_detection
+- CONTEXT: Attempted implementation of testing harness without proper scope refinement
+- ACTIONS: [Created testing framework, identified procedural violation, canceled ticket]
+- OUTCOME: Canceled PR #12, created new ticket for procedural compliance enforcement
+- LEARNING: Procedural definition is insufficient without enforcement mechanisms
+- KEY_INSIGHT: Start-of-task validation needed to prevent procedural violations
+- DATE: [2025-03-29]
 

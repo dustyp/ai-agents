@@ -21,14 +21,14 @@ Where:
   - `refactor` - Code improvements without behavior changes
   - `chore` - Maintenance tasks
   - `docs` - Documentation updates
-- `<linear-id>` is the Linear ticket ID (e.g., AI-123)
+- `<linear-id>` is the Linear ticket ID (e.g., CRA-123)
 - `<short-description>` is a brief, kebab-case description
 
 Examples:
 ```
-feature/AI-123-user-authentication
-bugfix/AI-456-fix-response-formatting
-hotfix/AI-789-security-vulnerability
+feature/CRA-123-user-authentication
+bugfix/CRA-456-fix-response-formatting
+hotfix/CRA-789-security-vulnerability
 ```
 
 ### Creating a New Branch
@@ -41,7 +41,7 @@ git checkout main
 git pull
 
 # Create and checkout new branch
-git checkout -b feature/AI-123-user-authentication
+git checkout -b feature/CRA-123-user-authentication
 ```
 
 ## Commit Strategy
@@ -50,7 +50,7 @@ git checkout -b feature/AI-123-user-authentication
 
 Commit messages should follow this format:
 ```
-[AI-123] Short descriptive summary (under 50 chars)
+[CRA-123] Short descriptive summary (under 50 chars)
 
 Detailed explanation of what changes were made and why.
 Include any important context or considerations.
@@ -116,7 +116,7 @@ We follow a **rebase-based workflow** for these reasons:
 Regularly rebase feature branches on main:
 
 ```bash
-git checkout feature/AI-123-user-authentication
+git checkout feature/CRA-123-user-authentication
 git fetch origin
 git rebase origin/main
 # Resolve any conflicts
@@ -197,7 +197,7 @@ After a PR is merged:
    ```bash
    git checkout main
    git pull
-   git branch -d feature/AI-123-user-authentication
+   git branch -d feature/CRA-123-user-authentication
    ```
 
 ## Special Cases
@@ -205,7 +205,7 @@ After a PR is merged:
 ### Hotfixes for Production
 
 1. Branch directly from the production tag/commit
-2. Follow the `hotfix/AI-XXX-description` naming convention
+2. Follow the `hotfix/CRA-XXX-description` naming convention
 3. After PR approval, merge to both `main` and the production branch
 4. Tag the production branch with a version increment
 
@@ -217,24 +217,144 @@ For features that take more than a few days:
 3. Break down into smaller incremental PRs when possible
 4. Request early feedback via informal reviews
 
+## Branch Coordination Process
+
+To prevent conflicts from multiple branches modifying the same files:
+
+### 1. Pre-Work Coordination
+
+Before creating a new ticket or branch:
+- Check active branches and PRs to identify which files are being modified
+- Review Linear for related tickets that might involve the same files
+- Document potential conflict areas with other in-progress work
+
+### 2. Work Allocation Guidelines
+
+- Prioritize sequential rather than parallel work on the same files
+- Wait for related work to be merged when modifications would overlap
+- For unavoidable parallel work, establish clear boundaries within files
+- Document dependencies between tickets explicitly in Linear
+
+### 3. Branch Creation Protocol
+
+- Create ticket with clear scope boundaries
+- Document potential file overlap with existing tickets in the description
+- If overlap exists, add "Depends on" or "Related to" links in Linear
+- Include conflict avoidance strategy in the ticket description
+- Create branch only when prerequisites are met
+
+### 4. Regular Synchronization
+
+- Update local branch from main at least daily
+- Track active work in team communication channels
+- Conduct periodic reviews of active branches (weekly)
+- Identify and address emerging conflicts early through communication
+
+### 5. Conflict Prevention Strategies
+
+- Structure code with clear component boundaries
+- Use interfaces to minimize implementation coupling
+- Break large features into smaller, independent PRs
+- When editing shared files, focus on distinct sections
+- Consider temporary feature flags for parallel development
+
+### 6. Merge Prioritization
+
+- Establish clear order for merging dependent branches
+- Prioritize PRs that unblock other work
+- Create explicit dependency chains in Linear
+- Regularly review PR queue to optimize merge order
+
+## Complete Workflow Process
+
+### Starting Work on a Ticket
+
+1. **Check ticket status and prerequisites**
+   - Verify ticket is not blocked by other work
+   - Check if any dependent tickets need to be completed first
+   - Review ticket details and requirements
+
+2. **Perform branch coordination check**
+   - Identify potential file conflicts with existing branches
+   - Determine if work should be deferred or modified to avoid conflicts
+   - Document coordination strategy if overlap exists
+
+3. **Create local branch**
+   - Ensure branch follows naming convention: `<type>/CRA-XX-description`
+   - Branch from latest main
+   - Push branch to remote with tracking
+
+4. **Update ticket status**
+   - Move ticket to "In Progress" in Linear
+   - Assign to self if not already assigned
+   - Update ticket with branch name for reference
+
+### Switching Between Work Items
+
+1. **Save current state**
+   - Commit all work-in-progress changes with [WIP] prefix
+   - Document current status in Linear ticket
+   - Push changes to remote branch
+
+2. **Prepare for switch**
+   - Clean working directory (stash any uncommitted changes)
+   - Document exact stopping point with detailed notes
+
+3. **Activate new context**
+   - Checkout target branch (create if needed)
+   - Pull latest changes from remote
+   - Review ticket details and requirements
+
+4. **Update work tracking**
+   - Update both tickets with context switch information
+   - Set appropriate status in Linear (Paused, Blocked, etc.)
+
+### Completing Work on a Ticket
+
+1. **Finalize implementation**
+   - Clean up code (remove debug statements, etc.)
+   - Apply consistent formatting
+   - Add or update documentation
+   - Complete final tests
+
+2. **Prepare commits**
+   - Ensure all commits reference ticket "[CRA-XX]"
+   - Squash WIP commits into logical units
+   - Use descriptive commit messages
+
+3. **Final verification**
+   - Run linting and static analysis tools
+   - Execute all tests relevant to changes
+   - Check against acceptance criteria
+
+4. **Create pull request**
+   - Push final changes to remote
+   - Set appropriate reviewers
+   - Link PR to Linear ticket
+
+5. **Update ticket status**
+   - Move ticket to "In Review" or equivalent status
+   - Add PR link to ticket
+   - Document any testing notes or special considerations
+
 ## Workflow Example
 
 ```
-# Linear ticket AI-123: "Implement user authentication"
+# Linear ticket CRA-123: "Implement user authentication"
 
-# 1. Create branch
+# 1. Start work on ticket
 git checkout main
 git pull
-git checkout -b feature/AI-123-user-authentication
+git checkout -b feature/CRA-123-user-authentication
 
 # 2. Make changes and commit
 # ... work, work, work ...
 git add .
-git commit -m "[AI-123] Add user authentication endpoints"
+git commit -m "[CRA-123] Add user authentication endpoints"
 
 # ... more work ...
 git add .
-git commit -m "[AI-123] Add login form and client-side validation"
+git commit -m "[CRA-123] Add login form and client-side validation"
 
 # 3. Prepare for PR
 git fetch origin
@@ -254,7 +374,7 @@ git push --force-with-lease
 # 9. Clean up
 git checkout main
 git pull
-git branch -d feature/AI-123-user-authentication
+git branch -d feature/CRA-123-user-authentication
 ```
 
-By following this workflow, we maintain a clean repository history, ensure high code quality, and maximize team efficiency.
+By following this workflow, we maintain a clean repository history, ensure high code quality, minimize merge conflicts, and maximize team efficiency.
