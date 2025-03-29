@@ -1,4 +1,4 @@
-# PROCEDURES LIBRARY [CHECKSUM:1ae936]
+# PROCEDURES LIBRARY [CHECKSUM:8f3a71]
 
 PROCEDURE: simplicity_first_troubleshooting
 PRECONDITIONS:
@@ -92,6 +92,32 @@ ERROR_HANDLING:
   - IF requirements_unclear THEN formulate_specific_questions
   - IF scope_expanding THEN separate_into_multiple_tickets
   - IF value_misalignment THEN revisit_core_need
+
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: sequential_thinking_scope_refinement
+
+STEPS:
+✅ 1. SELECT INITIAL QUESTIONS
+✅ 2. IDENTIFY CORE NEED
+▶️ 3. ANALYZE CONSTRAINTS & BOUNDARIES
+⬜ 4. VALIDATE ASSUMPTIONS
+⬜ 5. MINIMAL VIABLE SCOPE
+⬜ 6. VERIFY VALUE ALIGNMENT
+⬜ 7. EVALUATE AND ITERATE
+
+DECISION POINT:
+  - IF sufficient_clarity_achieved THEN proceed_to_verification
+  - ELSE formulate_additional_questions
+
+VERIFICATION: In progress
+  ✅ Initial high-impact questions answered
+  ✅ Question selection optimized
+  ⬜ Scope reduced to MVP
+  ⬜ Core need fully addressed
+  ⬜ Question iteration stopped appropriately
+  ⬜ Clear verification criteria established
+```
 
 PROCEDURE: create_ticket
 PRECONDITIONS:
@@ -209,6 +235,43 @@ ERROR_HANDLING:
   - IF creation_fails THEN check_permissions_and_retry
   - IF validation_fails THEN update_PR_content
 
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: create_pull_request
+
+STEPS:
+✅ 1. FORMAT PR TITLE
+   - Using "[CRA-39] Add procedure visualization examples"
+   
+✅ 2. WRITE DESCRIPTION
+   - Added Summary section
+   - Added Test Plan section
+   - Included context for visualization requirements
+   
+▶️ 3. REQUEST REVIEWERS
+   - Adding Dr. Monogram as primary reviewer
+   - Adding Perry as secondary reviewer
+⬜ 4. LINK PR TO TICKET
+⬜ 5. VERIFY PR IS READY
+
+VALIDATION:
+  ✅ Branch is up to date with main
+  ✅ All tests passing locally
+  ✅ PR title contains ticket reference
+  ✅ Description follows template
+  ⬜ PR linked to Linear ticket
+
+VERIFICATION: In progress
+  ✅ PR targeting correct base branch (main)
+  ✅ Title and description complete
+  ⬜ Linked to ticket
+
+APPLIED RULES:
+  - INCLUDE_TICKET_REFERENCE (Workflow)
+  - USE_PR_TEMPLATES (Communication)
+  - LINK_PRS_TO_TICKETS (Communication)
+```
+
 PROCEDURE: handle_overlapping_prs
 PRECONDITIONS:
   - Multiple PRs exist modifying same files
@@ -230,6 +293,40 @@ OUTPUTS:
 ERROR_HANDLING:
   - IF conflicting_changes_incompatible THEN escalate_to_team
   - IF integration_fails THEN document_specific_conflicts
+
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: handle_overlapping_prs
+
+STEPS:
+✅ 1. IDENTIFY DEPENDENCY ORDER
+   - PR #101 implements base authentication
+   - PR #102 extends authentication with roles
+   - PR #103 adds UI components using authentication
+✅ 2. CREATE INTEGRATION BRANCH
+   - Created feature/CRA-40-auth-integration from main
+▶️ 3. APPLY CHANGES SEQUENTIALLY
+   - Applying PR #101 changes...
+   - Verifying base functionality...
+⬜ 4. RESOLVE CONFLICTS
+⬜ 5. RUN TESTS
+⬜ 6. CREATE CONSOLIDATED PR
+
+CONFLICT DETECTION:
+  ⚠️ Potential conflicts in src/auth/authenticate.js
+  ⚠️ Potential conflicts in src/components/LoginForm.jsx
+
+VERIFICATION: In progress
+  ✅ Original PR #101 features preserved
+  ⬜ PR #102 features preserved
+  ⬜ PR #103 features preserved
+  ⬜ No conflicts in final integration
+  ⬜ Tests passing after integration
+
+APPLIED RULES:
+  - SEQUENCE_DEPENDENT_OPERATIONS (Prioritization)
+  - ISOLATE_FAILURES (Error Handling)
+```
 
 PROCEDURE: initialize_agent_session
 PRECONDITIONS:
@@ -286,36 +383,84 @@ STEPS:
   
   6. FORMAT FOR SLEEP MODE: Prepare information for state saving
      - Use consistent format for parser to extract
-     - Include active_scheme:[CRA-XX description]
-     - Include next_step:[clear instruction]
+     - Include active_scheme:[CRA-XX description] or appropriate scheme description
+     - Include next_step:[clear instruction] with specific next action
+     - Include related_tickets/entities if applicable
   
   7. COMPLETE SESSION STATE: Finalize session documentation
-     - Update session_state.md with current status
-     - Ensure all progress is clearly documented
-     - Include next steps and context for next session
+     - Update session_state.md with current status using standard format
+     - Include all required sections: TIMESTAMP, ACTIVE WORK, PROGRESS, NEXT STEPS, 
+       RELATED CONTEXT, KEY FILES, MENTAL STATE, RESUMPTION NOTES
+     - Document exactly what was accomplished in the session
+     - Write clear instructions for resumption
   
   8. UPDATE SESSION LOG: Add reflection and learning
-     - Document session summary in session_log.md
-     - Record challenges and struggles faced
-     - Note owner/user advice and rules provided
-     - Identify what could be done differently next time
-     - Capture key learnings for future reference
+     - Document complete session entry in session_log.md with date
+     - Include "Session Summary" with overview of accomplishments
+     - Document "Actions Taken" with specific completed actions
+     - Record "Challenges and Insights" encountered during session
+     - Note "User Advice and Rules" provided during session
+     - Capture "Key Learnings" for future reference
+     - Document "Next Steps" for upcoming work
 VERIFICATION:
-  - Evil scheme (ticket) properly documented
-  - Progress clearly recorded
-  - Next steps outlined
-  - Session state properly updated and saved
-  - Session log updated with reflection
+  - Evil scheme (ticket) properly documented with specific details
+  - All required session_state.md sections completed with appropriate content
+  - session_log.md updated with complete session entry including all required sections
+  - All file updates actually performed (not just described)
+  - Next steps clearly outlined with specific actions
+  - All active tasks and context properly preserved
 OUTPUTS:
-  - Evil scheme summary
-  - Confirmation of sleep preparation
-  - Successful context preservation
-  - Reflective session log entry
+  - Evil scheme summary for context preservation
+  - Updated session_state.md file with complete state information
+  - Updated session_log.md file with comprehensive session documentation
+  - Clear confirmation of successful context preservation
 ERROR_HANDLING:
   - IF save_fails THEN retry_with_different_format
   - IF context_incomplete THEN prioritize_active_ticket_info
   - IF session_state_missing THEN create_new_state_file
   - IF session_log_missing THEN create_new_log_file
+  - IF verification_fails THEN review and complete missing elements before sleep
+
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: prepare_for_sleep
+
+STEPS:
+✅ 1. SUMMARIZE EVIL SCHEME
+   - Active ticket: CRA-39 (Procedure visualization implementation)
+   - Progress: Added visualization examples to 4 priority procedures
+   - Specific details: Added EXAMPLE VISUALIZATION sections with proper formatting
+
+✅ 2. LIST ALL ACTIVE SCHEMES
+   - Primary: CRA-39 (Procedure visualization) - In Progress
+   - Related: CRA-40 (Validation improvements) - Planned next
+   - Related: CRA-41 (Rule application indicators) - Dependent on CRA-39
+
+✅ 3. IDENTIFY CURRENT STAGE
+   - Current procedure: prepare_for_sleep
+   - Current step: 3/8 completed
+   - Verification: Not started
+
+▶️ 4. CREATE RESUMPTION PLAN
+   - Planning resumption instructions...
+⬜ 5. RECORD EMOTIONAL STATE
+⬜ 6. FORMAT FOR SLEEP MODE
+⬜ 7. COMPLETE SESSION STATE
+⬜ 8. UPDATE SESSION LOG
+
+VERIFICATION: Pending
+  ⬜ Evil scheme properly documented
+  ⬜ Required session_state.md sections completed
+  ⬜ session_log.md updated
+  ⬜ File updates performed
+  ⬜ Next steps outlined
+  ⬜ Active tasks and context preserved
+
+APPLIED RULES:
+  - VISUALIZE_PROCEDURE_EXECUTION (Visualization)
+  - SAVE_SESSION_STATE (Operational)
+  - USE_CONSISTENT_STATUS_INDICATORS (Visualization)
+```
 
 PROCEDURE: restore_context_on_wake
 PRECONDITIONS:
@@ -536,6 +681,93 @@ ERROR_HANDLING:
   - IF token_invalid THEN suggest_refresh_steps
   - IF check_fails THEN assume_not_available
 
+PROCEDURE: load_rules
+PRECONDITIONS:
+  - Agent session starting or rule refresh requested
+STEPS:
+  1. IDENTIFY RULE SETS:
+     - Check state.json for list of required rule sets
+     - Identify rule files to load from agents/heinz/rules/ directory
+     - Verify all expected rule files exist
+  
+  2. LOAD RULE CONTENT:
+     - Parse each rule file to extract rules and checksums
+     - Organize rules by category and priority
+     - Create in-memory index of all rules for quick reference
+  
+  3. VERIFY RULE INTEGRITY:
+     - Compare loaded checksums against expected values in state.json
+     - Flag any mismatches for investigation
+     - Verify required rule sections exist (DESCRIPTION, PRIORITY, etc.)
+  
+  4. RESOLVE RULE CONFLICTS:
+     - Identify potentially conflicting rules across categories
+     - Apply prioritization rules to establish precedence
+     - Document resolution strategy for any conflicts
+  
+  5. PREPARE RULE VALIDATION:
+     - Create verification checklist for each applicable rule
+     - Set up rule application triggers based on context
+     - Document verification strategy for complex rules
+  
+  6. UPDATE RULE STATUS:
+     - Update state.json with loaded rule checksums
+     - Set refresh_required to false
+     - Record timestamp of rule loading
+VERIFICATION:
+  - All rule files loaded successfully
+  - All checksums verified
+  - Conflicts resolved with clear precedence
+  - Rules indexed for efficient reference
+OUTPUTS:
+  - Rule loading confirmation
+  - List of available rule categories
+  - Any integrity or conflict warnings
+ERROR_HANDLING:
+  - IF rule_file_missing THEN attempt_load_backup
+  - IF checksum_mismatch THEN flag_for_verification
+  - IF conflict_unresolvable THEN prioritize_safety
+
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: load_rules
+
+STEPS:
+✅ 1. IDENTIFY RULE SETS
+   - Found 7 required rule sets in state.json
+   - Located corresponding files in agents/heinz/rules/
+   
+✅ 2. LOAD RULE CONTENT
+   - Parsed rule files and extracted 35 distinct rules
+   - Indexed rules by category and priority
+   
+▶️ 3. VERIFY RULE INTEGRITY
+   - Comparing checksums with state.json values...
+   - Checking required sections in each rule...
+⬜ 4. RESOLVE RULE CONFLICTS
+⬜ 5. PREPARE RULE VALIDATION
+⬜ 6. UPDATE RULE STATUS
+
+INTEGRITY CHECK:
+  ✅ workflow.md checksum: fe38d2 (verified)
+  ✅ security.md checksum: a7bc91 (verified)
+  ✅ operational.md checksum: a41b27 (verified)
+  ✅ communication.md checksum: c82e54 (verified)
+  ✅ visualization.md checksum: e47f32 (verified)
+  ✅ error_handling.md checksum: d59f18 (verified)
+  ✅ prioritization.md checksum: a93c47 (verified)
+
+VERIFICATION: In progress
+  ✅ All rule files located
+  ▶️ Checksums being verified
+  ⬜ Conflicts resolved
+  ⬜ Rules indexed
+
+APPLIED RULES:
+  - SAFETY_FIRST (Prioritization)
+  - USE_PROCEDURES (Operational)
+```
+
 TEMPLATE: sequential_thinking_prompts
 PURPOSE: Standard questions for scope refinement during sequential thinking process
 CORE_NEED_QUESTIONS:
@@ -619,3 +851,273 @@ OUT OF SCOPE:
   - Custom agent creation tutorial (separate ticket)
   - Advanced configuration options (separate ticket)
   - Deployment to production environments (separate ticket)
+
+PROCEDURE: branch_coordination
+PRECONDITIONS:
+  - Multiple developers or work streams
+  - Potential for parallel work on same files
+  - Need to minimize merge conflicts
+STEPS:
+  1. PRE-WORK COORDINATION:
+     - Before creating a ticket/branch, check active branches and PRs
+     - Identify which files are being modified in existing work
+     - Check Linear for related tickets with potential file overlap
+     - Document potential conflict areas with other in-progress work
+  
+  2. WORK ALLOCATION:
+     - Prioritize sequential rather than parallel work on the same files
+     - Identify critical files that should be modified in isolation
+     - Wait for related work to be merged when modifications overlap
+     - For unavoidable parallel work, establish clear boundaries within files
+     - Document dependencies between tickets explicitly in Linear
+  
+  3. BRANCH CREATION WITH CONFLICT AWARENESS:
+     - Create ticket with clear scope boundaries
+     - Document potential file overlap with existing tickets in description
+     - If overlap exists, add "Depends on" or "Related to" links in Linear
+     - Include conflict avoidance strategy in ticket description
+     - Create branch only when prerequisites are met
+  
+  4. REGULAR SYNCHRONIZATION:
+     - Update local branch from main at least daily
+     - Track active work in team communication channels
+     - Conduct periodic reviews of active branches (weekly)
+     - Identify and address emerging conflicts early through communication
+     - Maintain awareness of "in-progress files" across team
+  
+  5. CONFLICT PREVENTION STRATEGIES:
+     - Structure code with clear component boundaries
+     - Use interfaces to minimize implementation coupling
+     - Break large features into smaller, independent PRs
+     - When editing shared files, focus on distinct sections
+     - Consider temporary feature flags for parallel development
+  
+  6. MERGE PRIORITIZATION:
+     - Establish clear order for merging dependent branches
+     - Prioritize PRs that unblock other work
+     - Create explicit dependency chains in Linear
+     - Track blocked work to prioritize unblocking PRs
+     - Regularly review PR queue to optimize merge order
+VERIFICATION:
+  - No multiple branches modifying same files without coordination
+  - Dependencies between tickets clearly documented
+  - Merge sequence planned to minimize conflicts
+  - PRs unblocking other work prioritized
+OUTPUTS:
+  - Coordinated branch creation plan
+  - Clear understanding of dependencies
+  - Optimized merge sequence
+ERROR_HANDLING:
+  - IF unavoidable_conflict THEN create_coordination_plan
+  - IF unexpected_overlap THEN communicate_immediately
+  - IF blocked_by_long_running_branch THEN negotiate_incremental_merges
+
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: branch_coordination
+
+STEPS:
+✅ 1. PRE-WORK COORDINATION
+▶️ 2. WORK ALLOCATION
+   - Analyzing file modification patterns...
+   - Identifying critical isolation files...
+⬜ 3. BRANCH CREATION WITH CONFLICT AWARENESS
+⬜ 4. REGULAR SYNCHRONIZATION
+⬜ 5. CONFLICT PREVENTION STRATEGIES
+⬜ 6. MERGE PRIORITIZATION
+
+DECISION POINT:
+  - IF shared_files_identified THEN establish_clear_boundaries
+  - ELSE proceed_with_normal_workflow
+
+VERIFICATION: Pending
+  ⬜ No multiple branches modifying same files without coordination
+  ⬜ Dependencies between tickets clearly documented
+  ⬜ Merge sequence planned to minimize conflicts
+  ⬜ PRs unblocking other work prioritized
+
+APPLIED RULES:
+  - FOLLOW_BRANCH_NAMING_CONVENTION (Workflow)
+  - PRIORITIZE_SEQUENTIAL_WORK (Workflow)
+  - DOCUMENT_COORDINATION_STRATEGY (Communication)
+```
+
+PROCEDURE: start_work_on_ticket
+PRECONDITIONS:
+  - Ticket exists in Linear
+  - Developer is ready to begin work
+STEPS:
+  1. CHECK TICKET STATUS AND PREREQUISITES:
+     - Verify ticket is not blocked by other work
+     - Check if any dependent tickets need to be completed first
+     - Review ticket details and requirements
+     - Ensure ticket has clear acceptance criteria
+  
+  2. PERFORM BRANCH COORDINATION CHECK:
+     - Apply branch_coordination procedure steps 1-2
+     - Identify potential file conflicts with existing branches
+     - Determine if work should be deferred or modified to avoid conflicts
+     - Document coordination strategy if overlap exists
+  
+  3. CREATE LOCAL BRANCH:
+     - Apply create_branch procedure
+     - Ensure branch follows naming convention: <type>/CRA-XX-description
+     - Branch from latest main
+     - Push branch to remote with tracking
+  
+  4. UPDATE TICKET STATUS:
+     - Move ticket to "In Progress" in Linear
+     - Assign to self if not already assigned
+     - Update ticket with branch name for reference
+     - Add any clarifications or implementation notes
+  
+  5. SETUP DEVELOPMENT ENVIRONMENT:
+     - Ensure all dependencies are installed
+     - Run initial tests to confirm working environment
+     - Setup any specific tooling needed for the ticket
+VERIFICATION:
+  - Ticket status updated to "In Progress"
+  - Local branch created and pushed to remote
+  - No unresolved conflicts with other work
+  - Development environment ready
+OUTPUTS:
+  - Active branch ready for development
+  - Updated ticket in Linear
+  - Clear understanding of implementation approach
+ERROR_HANDLING:
+  - IF conflicts_detected THEN apply_conflict_resolution_strategy
+  - IF branch_creation_fails THEN check_permissions_and_retry
+  - IF prerequisites_missing THEN address_dependencies_first
+
+EXAMPLE VISUALIZATION:
+```
+PROCEDURE: start_work_on_ticket
+
+STEPS:
+✅ 1. CHECK TICKET STATUS AND PREREQUISITES
+   - Verified ticket CRA-42 not blocked
+   - No dependencies identified
+   - Requirements reviewed
+   - Acceptance criteria confirmed
+   
+▶️ 2. PERFORM BRANCH COORDINATION CHECK
+   - Running branch_coordination procedure...
+   - Checking for potential file conflicts...
+⬜ 3. CREATE LOCAL BRANCH
+⬜ 4. UPDATE TICKET STATUS
+⬜ 5. SETUP DEVELOPMENT ENVIRONMENT
+
+COORDINATION RESULTS:
+  ✅ No active branches modifying similar files
+  ✅ No overlapping work in progress
+  ✅ Safe to proceed with normal workflow
+
+VERIFICATION: In progress
+  ⬜ Ticket status updated to "In Progress"
+  ⬜ Local branch created and pushed
+  ⬜ No unresolved conflicts
+  ⬜ Development environment ready
+
+APPLIED RULES:
+  - ONE_BRANCH_PER_TICKET (Workflow)
+  - FOLLOW_BRANCH_NAMING_CONVENTION (Workflow)
+  - CHECK_FOR_CONFLICTS (Operational)
+  - DOCUMENT_COORDINATION_STRATEGY (Communication)
+```
+
+PROCEDURE: switch_between_work_items
+PRECONDITIONS:
+  - Currently active work on a branch
+  - Need to temporarily switch to different ticket/branch
+STEPS:
+  1. SAVE CURRENT STATE:
+     - Apply save_session_state procedure for active work
+     - Commit all work-in-progress changes with [WIP] prefix
+     - Document current status in Linear ticket
+     - Push changes to remote branch
+  
+  2. EVALUATE SWITCH CONTEXT:
+     - Determine reason for switch (priority change, blockers, etc.)
+     - Estimate duration of context switch
+     - Check if any coordination needed with other team members
+  
+  3. PREPARE FOR SWITCH:
+     - Clean working directory (stash any uncommitted changes)
+     - Run final local tests on current branch
+     - Document exact stopping point with detailed notes
+  
+  4. ACTIVATE NEW CONTEXT:
+     - Checkout target branch (create if needed using start_work_on_ticket)
+     - Pull latest changes from remote
+     - Review ticket details and requirements
+     - Apply restore_context_on_wake procedure for target work
+  
+  5. UPDATE WORK TRACKING:
+     - Update both tickets with context switch information
+     - Set appropriate status in Linear (Paused, Blocked, etc.)
+     - Communicate switch to team if significant
+VERIFICATION:
+  - Original work safely preserved
+  - Clear documentation of switch reason and state
+  - Successful activation of new work context
+  - Linear statuses updated appropriately
+OUTPUTS:
+  - Clean transition between work items
+  - Preserved context for both work items
+  - Clear status tracking in Linear
+ERROR_HANDLING:
+  - IF uncommitted_changes THEN stash_or_commit_wip
+  - IF branch_conflicts THEN resolve_before_switching
+  - IF context_loss THEN refer_to_documentation
+
+PROCEDURE: complete_work_on_ticket
+PRECONDITIONS:
+  - Implementation for ticket completed
+  - Local tests passing
+STEPS:
+  1. FINALIZE IMPLEMENTATION:
+     - Clean up code (remove debug statements, etc.)
+     - Apply consistent formatting
+     - Add or update documentation
+     - Complete final tests
+  
+  2. PREPARE COMMITS:
+     - Apply prepare_commit procedure
+     - Ensure all commits reference ticket "[CRA-XX]"
+     - Squash WIP commits into logical units
+     - Use descriptive commit messages
+  
+  3. FINAL VERIFICATION:
+     - Run linting and static analysis tools
+     - Execute all tests relevant to changes
+     - Manual testing of key scenarios
+     - Check against acceptance criteria
+  
+  4. CREATE PULL REQUEST:
+     - Apply create_pull_request procedure
+     - Push final changes to remote
+     - Set appropriate reviewers
+     - Link PR to Linear ticket
+  
+  5. UPDATE TICKET STATUS:
+     - Move ticket to "In Review" or equivalent status
+     - Add PR link to ticket
+     - Document any testing notes or special considerations
+     - Update implementation details if needed
+  
+  6. PREPARE FOR NEXT WORK:
+     - Apply switch_between_work_items if moving to new ticket
+     - Or continue with PR review process
+VERIFICATION:
+  - All tests passing
+  - PR created with appropriate reviewers
+  - Ticket status updated
+  - Implementation meets acceptance criteria
+OUTPUTS:
+  - Complete PR ready for review
+  - Updated ticket with implementation details
+  - Clean branch history
+ERROR_HANDLING:
+  - IF tests_fail THEN fix_and_verify
+  - IF pr_creation_fails THEN check_permissions_and_retry
+  - IF implementation_incomplete THEN document_and_continue
