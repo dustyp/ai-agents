@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Test rule file integrity and structure
+# Test rule integrity in CLAUDE.md and reference examples
 
 # Load test utilities
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 source "$SCRIPT_DIR/../test_utils.sh"
 
-# Set rules directory
-RULES_DIR="$BASE_DIR/agents/heinz/rules"
+# Set paths
+CLAUDE_MD="$BASE_DIR/CLAUDE.md"
+RULE_INDEX="$BASE_DIR/agents/heinz/reference_examples/rule_implementations/rule_index.md"
 
 # Test header
 echo -e "${YELLOW}╔════════════════════════════════════════════════╗${NC}"
@@ -18,83 +19,57 @@ echo ""
 # Test result tracking
 TEST_FAILED=0
 
-# Verify rules directory exists
-if ! check_dir_exists "$RULES_DIR" "Rules directory exists"; then
-    echo -e "${RED}Cannot continue - rules directory doesn't exist!${NC}"
-    exit 1
-fi
-
-# Test required rule files exist
+# Verify files exist
 print_section "Required Rule Files"
 
-# Core rule files that must exist
-REQUIRED_RULE_FILES=(
-    "workflow.md"
-    "security.md"
-    "operational.md"
-    "communication.md"
-    "visualization.md"
-    "error_handling.md"
-    "prioritization.md"
+check_file_exists "$CLAUDE_MD" "CLAUDE.md exists" || TEST_FAILED=1
+check_file_exists "$RULE_INDEX" "Rule index file exists" || TEST_FAILED=1
+
+# Check for flattened rule system
+print_section "Flattened Rule System Validation"
+
+# Required rule categories that must exist in CLAUDE.md
+REQUIRED_RULE_CATEGORIES=(
+    "Security Rules"
+    "Workflow Rules"
+    "Error Handling Rules"
+    "Communication Rules"
+    "Operational Rules"
 )
 
-# Check each required file
-for rule_file in "${REQUIRED_RULE_FILES[@]}"; do
-    check_file_exists "$RULES_DIR/$rule_file" "Rule file $rule_file exists" || TEST_FAILED=1
+# Check each required category in CLAUDE.md
+for category in "${REQUIRED_RULE_CATEGORIES[@]}"; do
+    check_file_contains "$CLAUDE_MD" "$category" "CLAUDE.md contains $category" || TEST_FAILED=1
 done
 
-# Check README exists
-check_file_exists "$RULES_DIR/README.md" "Rules README file exists" || TEST_FAILED=1
+# Check rule_index.md for required categories
+print_section "Rule Index Validation"
 
-print_section "Rule File Content Validation"
-
-# Verify each rule file has required sections
-for rule_file in "${REQUIRED_RULE_FILES[@]}"; do
-    if check_file_exists "$RULES_DIR/$rule_file" "Rule file $rule_file for content"; then
-        check_file_contains "$RULES_DIR/$rule_file" "CHECKSUM:" "$rule_file has checksum" || TEST_FAILED=1
-        check_file_contains "$RULES_DIR/$rule_file" "DESCRIPTION:" "$rule_file has description sections" || TEST_FAILED=1
-        check_file_contains "$RULES_DIR/$rule_file" "PRIORITY:" "$rule_file has priority sections" || TEST_FAILED=1
-    fi
+for category in "${REQUIRED_RULE_CATEGORIES[@]}"; do
+    check_file_contains "$RULE_INDEX" "$category" "Rule index contains $category" || TEST_FAILED=1
 done
 
-# Verify rule priority values are valid
-print_section "Rule Priority Validation"
+# Verify critical rules are present
+print_section "Critical Rule Verification"
 
-# Function to check rule priorities
-check_rule_priorities() {
-    local rule_file="$1"
-    local valid_priorities=0
-    
-    # Count valid priorities
-    grep -E "PRIORITY: (Critical|High|Medium|Low)" "$rule_file" > /dev/null
-    valid_priorities=$?
-    
-    if [ $valid_priorities -eq 0 ]; then
-        echo -e "${GREEN}✓ $rule_file has valid priority values${NC}"
-        return 0
-    else
-        echo -e "${RED}✗ $rule_file has invalid priority values${NC}"
-        echo -e "  Priorities must be: Critical, High, Medium, or Low"
-        return 1
-    fi
-}
+# List of critical rules that must exist
+CRITICAL_RULES=(
+    "NEVER include sensitive data"
+    "ALWAYS use environment variables"
+    "NEVER expose sensitive"
+    "ALWAYS validate the source"
+    "NEVER allow command injection"
+    "ALWAYS use one branch per ticket"
+    "NEVER commit directly to the main branch"
+    "ALWAYS follow defined error handling"
+    "ALWAYS isolate failures"
+    "ALWAYS preserve system state"
+)
 
-# Check priorities in each rule file
-for rule_file in "${REQUIRED_RULE_FILES[@]}"; do
-    if check_file_exists "$RULES_DIR/$rule_file" "Rule file $rule_file for priorities"; then
-        check_rule_priorities "$RULES_DIR/$rule_file" || TEST_FAILED=1
-    fi
+# Check each critical rule in CLAUDE.md
+for rule in "${CRITICAL_RULES[@]}"; do
+    check_file_contains "$CLAUDE_MD" "$rule" "Critical rule: $rule exists in CLAUDE.md" || TEST_FAILED=1
 done
-
-# Verify README contains all rule categories
-print_section "Rule Documentation Validation"
-
-if check_file_exists "$RULES_DIR/README.md" "README for content"; then
-    for rule_file in "${REQUIRED_RULE_FILES[@]}"; do
-        rule_category=$(basename "$rule_file" .md)
-        check_file_contains "$RULES_DIR/README.md" "$rule_category" "README mentions $rule_category rules" || TEST_FAILED=1
-    done
-fi
 
 # Exit with appropriate status
 if [ $TEST_FAILED -eq 0 ]; then

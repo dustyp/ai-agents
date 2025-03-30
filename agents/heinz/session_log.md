@@ -272,3 +272,76 @@ Created feature branch for CRA-43 (procedural enforcement checkpoints) and began
 - Develop start-of-task validation steps
 - Add guard rails for session operations
 - Establish proper enforcement hooks for rule compliance
+
+## Session: 2025-03-29 (Late Evening)
+
+### Session Summary
+Reorganized and simplified procedures.md, created reference_examples directory, and documented workflow relationships between procedures. Fixed conflicts between overlapping branches and created PRs for the changes.
+
+### Actions Taken
+- Created PR #15 with simplified procedure format and reference_examples
+- Created PR #16 to document workflow relationships between procedures
+- Resolved conflicts between branches that modified the same files
+- Added COMMON WORKFLOWS section to clearly describe ticket lifecycle
+- Implemented cross-references between related procedures
+- Created procedure_menu.sh for easy discovery of procedures
+- Converted rules/ to reference_examples/ with CLAUDE.md as source of truth
+
+### Key Insights
+- Procedural organization benefits from clear categorization and complexity indicators
+- The relationship between procedures should be explicitly documented
+- Branch conflicts demonstrate the importance of branch_coordination
+- Overlapping PRs should be avoided or carefully managed
+- A menu system makes procedures more discoverable and usable
+
+### Next Steps
+- Review feedback on PRs #15 and #16 when available
+- Consider creating a ticket for branch coordination automation
+- Document lessons from the conflicting branch situation
+- Create a detailed guide on applying branch_coordination
+- Improve integration of procedures into development workflow
+
+### Lessons About Branch Coordination
+- Always check existing branches before creating a new branch
+- Identify which files are being modified in existing branches
+- Prioritize sequential work over parallel work on the same files
+- Document potential file conflicts explicitly when parallel work is necessary
+- Create implementation-specific branches focused on a single aspect of a ticket
+- Follow the branch_coordination procedure from our own documentation!
+
+## Session: 2025-03-30
+
+### Session Summary
+Cleaned up git conflicts and branch issues. Created a clean PR for the workflow clarification changes, merged it successfully, and removed all feature branches to restore a clean repository state.
+
+### Actions Taken
+- Fixed a complex git situation with two conflicting PRs (#15 and #16)
+- Created a clean branch (feature/CRA-44-clean-workflow-clarification) from main
+- Applied workflow clarification changes to the clean branch
+- Created new PR #17 as a clean replacement for PR #16
+- Closed PR #16 due to merge conflicts
+- Successfully merged PR #17 to main
+- Deleted all feature branches to leave only main
+- Updated state files to reflect completed work and clean repository state
+
+### Key Insights
+- Creating overlapping branches with similar changes leads to complex merge conflicts
+- When faced with git conflicts, starting fresh from main is often cleaner than attempting complex merges
+- Regular branch cleanup is essential for repository maintenance
+- PRs should be focused on specific, non-overlapping changes
+- Maintaining a clean main branch simplifies future development
+
+### Next Steps
+- Create a comprehensive guide for branch management best practices
+- Implement automation for branch cleanup after successful merges
+- Consider creating a ticket for better branch visualization tools
+- Update documentation with lessons learned from this conflict resolution
+- Review and enhance the branch_coordination procedure with real-world examples
+
+### Lessons About Repository Maintenance
+- Regularly prune merged and obsolete branches
+- Ensure PRs are fully merged before deleting branches
+- Keep branch names consistent with ticket numbers and descriptions
+- Maintain a single branch of truth (main)
+- Document branch relationships when working on related features
+- Prefer creating a clean branch over complex merges when conflicts occur

@@ -6,7 +6,7 @@ This directory contains the testing framework for verifying agent behavior, proc
 
 - `bootstrap/`: Tests for agent bootstrap process
 - `procedures/`: Tests for procedure execution and validation
-- `rules/`: Tests for rule compliance and conflict resolution
+- `rules/`: Tests for rule compliance and flattened rule system integrity
 
 ## Test Philosophy
 
@@ -17,6 +17,13 @@ The agent testing framework follows these principles:
 3. **Clarity**: Test failure messages should clearly indicate what went wrong
 4. **Coverage**: Tests should cover core functionality and edge cases
 5. **Performance**: Tests should execute efficiently
+
+## Rule Testing
+
+The rule tests verify the integrity of the flattened rule system in CLAUDE.md and the reference examples. The tests ensure:
+- All required rule categories exist
+- Critical rules are properly defined
+- Rule index properly maps to the flattened rule system
 
 ## Running Tests
 
