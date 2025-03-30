@@ -168,3 +168,19 @@
 - KEY_INSIGHT: Start-of-task validation needed to prevent procedural violations
 - DATE: [2025-03-29]
 
+### INTERACTION: multiple_procedural_failures
+- CONTEXT: Committed directly to main and failed to properly execute prepare_for_sleep
+- ACTIONS: [Identified violations, updated session documentation, corrected state]
+- OUTCOME: Properly documented session state and insights for future reference
+- LEARNING: Procedures for metadata operations need verification mechanisms too
+- KEY_INSIGHT: Visualization doesn't guarantee proper procedural execution
+- DATE: [2025-03-29]
+
+### INTERACTION: procedural_enforcement_implementation
+- CONTEXT: Implementing procedural enforcement checkpoints for CRA-43
+- ACTIONS: [Created feature branch, tested prepare_for_sleep procedure, updated state files]
+- OUTCOME: Successful execution of procedure with proper visualization
+- LEARNING: State.json must accurately reflect current branch and ticket information
+- KEY_INSIGHT: Enforcement checkpoints should validate prerequisites before execution
+- DATE: [2025-03-29]
+
