@@ -6,22 +6,18 @@
     "validation_status": "SUCCESS"
   },
   "context": {
-    "loaded_rules": ["workflow", "security", "operational", "communication", "visualization", "error_handling", "prioritization"],
+    "loaded_rules": ["flattened"],
     "rule_checksums": {
-      "workflow": "fe38d2",
-      "security": "a7bc91",
-      "operational": "a41b27",
-      "communication": "c82e54",
-      "visualization": "e47f32",
-      "error_handling": "d59f18",
-      "prioritization": "a93c47"
+      "flattened": "fe23696"
     },
+    "rule_source": "CLAUDE.md",
+    "reference_examples": true,
     "refresh_required": false
   },
   "project": {
     "current": "ai-agents",
-    "active_tickets": [],
-    "branch": "learning/knowledge-graph-procedure-enhancement"
+    "active_tickets": ["CRA-44"],
+    "branch": "feature/CRA-44-reorganize-procedures-and-rules"
   },
   "session": {
     "start_time": 1711691460,
@@ -30,16 +26,18 @@
   },
   "tasks": {
     "active": [
-      "Test prepare_for_sleep procedure",
-      "Implement enforcement checkpoints"
+      "Reorganize procedures with menu system",
+      "Convert rules to reference examples"
     ],
     "completed": [
-      "Create CRA-43 feature branch",
-      "Begin enforcement checkpoints implementation"
+      "Create feature/CRA-44 branch",
+      "Simplify procedure format",
+      "Create procedure_menu.sh",
+      "Update procedure.md with categorized menu"
     ],
     "blocked": []
   },
-  "emotional_state": "determined",
-  "last_interaction": "Testing prepare_for_sleep procedure for CRA-43",
-  "last_updated": 1743306735
+  "emotional_state": "organized",
+  "last_interaction": "Reorganizing procedures and rules for CRA-44",
+  "last_updated": 1743307200
 }
