@@ -11,7 +11,7 @@ echo "====================================="
 echo
 
 # Use awk to extract the procedure menu section
-awk '/^## PROCEDURE MENU$/,/^## PROCEDURES$/' "$PROCEDURES_FILE" | grep -v "^## " | grep -v "^$"
+awk '/^## PROCEDURE MENU$/,/^## COMMON WORKFLOWS$/' "$PROCEDURES_FILE" | grep -v "^## " | grep -v "^$"
 
 echo 
 echo "====================================="

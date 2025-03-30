@@ -32,6 +32,27 @@
 - [verify_environment_variables](#verify_environment_variables) [SIMPLE]
 - [load_rules](#load_rules) [STANDARD]
 
+## COMMON WORKFLOWS
+
+### Ticket Creation and Implementation Workflow
+This workflow clarifies the relationship between ticket-related procedures:
+
+1. **Initial Capture**: Use [create_ticket](#create_ticket) to create a placeholder ticket with basic information (title, brief description, priority)
+
+2. **Scope Analysis**: When ready to begin work, use [select_ticket_for_work](#select_ticket_for_work) to perform detailed scope refinement using sequential thinking
+
+3. **Implementation Setup**: After scope is defined, use [start_work_on_ticket](#start_work_on_ticket) to set up the proper branch and development environment
+
+4. **Development**: Work on implementation until complete
+
+5. **Completion**: Use [complete_work_on_ticket](#complete_work_on_ticket) to finalize work and create PR
+
+Each procedure has a specific purpose in the ticket lifecycle:
+- `create_ticket`: Quick placeholder creation (minimal analysis)
+- `select_ticket_for_work`: Detailed scope analysis and refinement
+- `start_work_on_ticket`: Branch coordination and development setup
+- `complete_work_on_ticket`: Work finalization and PR creation
+
 ## PROCEDURES
 
 ### create_ticket {#create_ticket} [SIMPLE]
@@ -69,6 +90,7 @@
 **VISUALIZATION**: Show progress through the 6 core steps with visual indicators
 **RULES**: Follows CONSTRAIN_SCOPE, DOCUMENT_CONTEXT, ONE_BRANCH_PER_TICKET
 **ERRORS**: If scope unclear, conduct additional analysis before proceeding
+**NEXT PROCEDURE**: After completing this procedure, use [start_work_on_ticket](#start_work_on_ticket)
 
 ### create_branch {#create_branch} [SIMPLE]
 **DESCRIPTION**: Creates a properly named git branch for ticket implementation
@@ -183,19 +205,20 @@
 **DESCRIPTION**: Begins work on a ticket with proper setup and coordination
 
 **PREREQUISITES**:
-- Ticket exists and ready for implementation
-- Developer prepared to begin work
+- Ticket exists with refined scope (after select_ticket_for_work)
+- Developer prepared to begin implementation
 
 **STEPS**:
 1. Check ticket status and verify not blocked by dependencies
 2. Perform branch coordination check to avoid conflicts
-3. Create local branch with proper naming
-4. Update ticket status to "In Progress"
+3. Create local branch with proper naming (if not already created)
+4. Update ticket status to "In Progress" (if not already updated)
 5. Set up development environment for implementation
 
 **VISUALIZATION**: Display progress through the 5 core steps with visual indicators
 **RULES**: Follows ONE_BRANCH_PER_TICKET, CHECK_ACTIVE_BRANCHES
 **ERRORS**: If conflicts detected, apply resolution strategy; if prerequisites missing, address first
+**PREVIOUS PROCEDURE**: This procedure should be used after [select_ticket_for_work](#select_ticket_for_work)
 
 ### switch_between_work_items {#switch_between_work_items} [STANDARD]
 **DESCRIPTION**: Safely switches context between different work items
