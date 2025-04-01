@@ -1,6 +1,36 @@
 # PROCEDURAL MEMORY [CHECKSUM:e8f3c7]
 
 
+## EMAIL OPERATIONS
+
+### TEMPLATE: email_checking
+- STEPS: [1. use mcp__gmail__search_emails tool, 2. query for specific sender or reply, 3. read messages]
+- VERIFICATION: check search results exist, verify sender address
+- LAST EXECUTION: [2025-03-30, status: SUCCESS]
+- NOTES: Always use the mcp__gmail tools for all email operations
+
+### TEMPLATE: email_sending
+- STEPS: [1. compose email body, 2. use mcp__gmail__send_email tool, 3. verify delivery, 4. update logs]
+- VERIFICATION: confirm email sent successfully, track message ID
+- LAST EXECUTION: [2025-03-30, status: SUCCESS]
+- NOTES: Always capture message ID for future reference
+
+### PROCEDURE: check_recruitment_status
+- DESCRIPTION: Human-supervised procedure for checking recruitment workflow status
+- PREREQUISITES: Recruitment workflow initialized, state file exists
+- STEPS:
+  1. Check current state in recruitment_state.json
+  2. Use mcp__gmail__search_emails to look for responses from target
+  3. If response found, read with mcp__gmail__read_email and analyze content
+  4. Propose next actions based on recruitment plan
+  5. Wait for human confirmation before proceeding
+  6. Execute approved actions and update state file
+  7. Log all actions in recruitment_log.txt and recruitment_log.json
+- RULES: Follows HUMAN_IN_LOOP_APPROVAL, DOCUMENT_CONTEXT
+- ERRORS: If email search fails, retry with different query; if state file missing, recreate from logs
+- LAST EXECUTION: [2025-03-31, status: UPDATED]
+- NOTES: All email operations require explicit human approval
+
 ## GIT OPERATIONS
 
 ### TEMPLATE: git_commit

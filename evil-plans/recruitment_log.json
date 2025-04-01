@@ -1,0 +1,35 @@
+{
+  "events": [
+    {
+      "date": "2025-03-30",
+      "action": "initial_email_sent",
+      "message_id": "195eae00a41db704",
+      "recipient": "aidan.buddy.pearce@gmail.com",
+      "status": "delivered"
+    },
+    {
+      "date": "2025-03-31",
+      "action": "follow_up_email_sent",
+      "message_id": "195eae9807066f4b", 
+      "recipient": "aidan.buddy.pearce@gmail.com",
+      "cc": "dusty.pearce@gmail.com",
+      "status": "delivered",
+      "notes": "Added cc to dusty.pearce@gmail.com for human-in-loop monitoring"
+    },
+    {
+      "date": "2025-04-01",
+      "action": "follow_up_email_sent",
+      "message_id": "195f3a8279ddc542",
+      "recipient": "aidan.buddy.pearce@gmail.com",
+      "cc": "dusty.pearce@gmail.com",
+      "status": "delivered",
+      "notes": "Sent enhanced follow-up #2 with more enthusiastic tone and specific technical achievements"
+    }
+  ],
+  "status": {
+    "current_state": "FOLLOW_UP_2",
+    "last_action_date": "2025-04-01",
+    "follow_up_count": 2,
+    "workflow_type": "human_in_loop"
+  }
+}

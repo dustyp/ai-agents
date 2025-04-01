@@ -1,0 +1,50 @@
+[2025-03-30T12:45:00Z] Recruitment plan initialized
+[2025-03-30T12:45:30Z] Initial state file created
+[2025-03-30T12:46:00Z] Initial prompt file created[Sun Mar 30 23:14:23 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:14:23 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:14:23 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:14:23 PDT 2025] Launching Claude with prompt: Send initial recruitment email to Aidan at aidan.buddy.pearce@gmail.com using the template in recruitment-plan.md. Send immediately and update state.
+[Sun Mar 30 23:15:06 PDT 2025] Wake-up complete
+[Sun Mar 30 23:16:39 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:16:39 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:16:39 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:16:39 PDT 2025] Launching Claude with prompt: Send initial recruitment email to Aidan at aidan.buddy.pearce@gmail.com using the template in recruitment-plan.md. Send immediately and update state.
+[Sun Mar 30 23:16:39 PDT 2025] Wake-up complete
+[Sun Mar 30 23:17:14 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:17:14 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:17:14 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:17:14 PDT 2025] Launching Claude with prompt: Send initial recruitment email to Aidan at aidan.buddy.pearce@gmail.com using the template in recruitment-plan.md. Send immediately and update state.
+[Sun Mar 30 23:17:14 PDT 2025] Wake-up complete
+[Sun Mar 30 23:20:00 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:20:00 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:20:00 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:20:00 PDT 2025] Launching Claude with prompt: Send initial recruitment email to Aidan at aidan.buddy.pearce@gmail.com using the template in recruitment-plan.md. Send immediately and update state.
+[Sun Mar 30 23:20:00 PDT 2025] Wake-up complete
+[Sun Mar 30 23:20:23 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:20:23 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:20:23 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:20:23 PDT 2025] Launching Claude with prompt: Send initial recruitment email to Aidan at aidan.buddy.pearce@gmail.com using the template in recruitment-plan.md. Send immediately and update state.
+[Sun Mar 30 23:21:24 PDT 2025] Sent initial recruitment email to aidan.buddy.pearce@gmail.com
+[Sun Mar 30 23:25:21 PDT 2025] Sent initial recruitment email to aidan.buddy.pearce@gmail.com using Gmail API
+[Sun Mar 30 23:27:00 PDT 2025] IMPORTANT: For all email operations, use mcp__gmail tools (mcp__gmail__search_emails, mcp__gmail__read_email, mcp__gmail__send_email)
+[Sun Mar 30 23:27:15 PDT 2025] Enhanced wake_up_inator.sh and claude-agent.sh for non-interactive operation
+[Sun Mar 30 23:27:30 PDT 2025] Updated memory.md with email operation templates
+[Sun Mar 30 23:27:45 PDT 2025] Next scheduled check for response: Mon Mar 31 09:30:00 PDT 2025
+[Sun Mar 30 23:27:26 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:27:26 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:27:26 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:27:26 PDT 2025] Launching Claude with prompt: IMPORTANT: Use your mcp__gmail tools to check for any response from Aidan at aidan.buddy.pearce@gmail.com. Query for "from:aidan.buddy.pearce@gmail.com" or look for replies to message ID 195eae00a41db704. If no response found, use the mcp__gmail__send_email tool to send follow-up email #1 from recruitment-plan.md. If response received, analyze content and proceed according to recruitment-plan.md Phase 3.
+[Sun Mar 30 23:27:26 PDT 2025] Running in non-interactive mode with output to /Users/aidan/_projects/ai-agents/evil-plans/agent_response.txt
+[Sun Mar 30 23:27:26 PDT 2025] Wake-up complete
+[Sun Mar 30 23:27:26 PDT 2025] Agent response saved to /Users/aidan/_projects/ai-agents/evil-plans/agent_response.txt
+[Sun Mar 30 23:30:00 PDT 2025] Wake-up script executed
+[Sun Mar 30 23:30:00 PDT 2025] Script directory: /Users/aidan/_projects/ai-agents/evil-plans
+[Sun Mar 30 23:30:00 PDT 2025] Project directory: /Users/aidan/_projects/ai-agents
+[Sun Mar 30 23:30:00 PDT 2025] Launching Claude with prompt: IMPORTANT: Use your mcp__gmail tools to check for any response from Aidan at aidan.buddy.pearce@gmail.com. Query for "from:aidan.buddy.pearce@gmail.com" or look for replies to message ID 195eae00a41db704. If no response found, use the mcp__gmail__send_email tool to send follow-up email #1 from recruitment-plan.md. If response received, analyze content and proceed according to recruitment-plan.md Phase 3.
+[Sun Mar 30 23:30:00 PDT 2025] Running in non-interactive mode with output to /Users/aidan/_projects/ai-agents/evil-plans/agent_response.txt
+[Sun Mar 30 23:30:00 PDT 2025] Wake-up complete
+[Sun Mar 30 23:30:00 PDT 2025] Agent response saved to /Users/aidan/_projects/ai-agents/evil-plans/agent_response.txt
+[Sun Mar 30 23:34:20 PDT 2025] WORKFLOW UPDATE: Changed to human-in-the-loop workflow model. Automated execution via cron disabled.
+[Sun Mar 30 23:37:14 PDT 2025] Sent follow-up email #1 to aidan.buddy.pearce@gmail.com with cc to dusty.pearce@gmail.com
+[Sun Mar 30 23:40:12 PDT 2025] Session properly closed with prepare_for_sleep procedure and memory graph updated
+[Tue Apr  1 16:21:35 PDT 2025] Sent follow-up email #2 to aidan.buddy.pearce@gmail.com with cc to dusty.pearce@gmail.com (Message ID: 195f3a8279ddc542)
