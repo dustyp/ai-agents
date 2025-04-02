@@ -1,4 +1,4 @@
-# PROCEDURES LIBRARY [CHECKSUM:8f3a71]
+# PROCEDURES LIBRARY [CHECKSUM:9d4c82]
 
 ## PROCEDURE MENU
 
@@ -247,15 +247,17 @@ Each procedure has a specific purpose in the ticket lifecycle:
 
 **STEPS**:
 1. Clean up code and remove debug statements
-2. Prepare commits with proper ticket references
+2. Prepare commits with proper ticket references (only commit code deliverables, not state files)
 3. Run final verification including tests
 4. Create pull request and link to ticket
 5. Update ticket status to "In Review"
-6. Prepare for next work item
+6. Update local state files to reflect completion
+7. Prepare for next work item
 
-**VISUALIZATION**: Display progress through the 6 core steps with visual indicators
-**RULES**: Follows VERIFY_IMPLEMENTATION, LINK_PRS_TO_TICKETS
+**VISUALIZATION**: Display progress through the 7 core steps with visual indicators
+**RULES**: Follows VERIFY_IMPLEMENTATION, LINK_PRS_TO_TICKETS, SEPARATE_CODE_FROM_STATE
 **ERRORS**: If tests fail, fix and verify; if PR creation fails, check permissions
+**KEY_INSIGHT**: Only commit code deliverables to PRs, keep state files tracked locally
 
 ### sequential_thinking_scope_refinement {#sequential_thinking_scope_refinement} [COMPLEX]
 **DESCRIPTION**: Analyzes and refines task scope through structured thinking

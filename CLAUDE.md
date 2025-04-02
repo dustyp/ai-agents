@@ -25,6 +25,7 @@ Always follow ALL rules in this file for every prompt and interaction. Rules are
 - ALWAYS break large features into smaller, independent PRs
 - ALWAYS delete branches after they are merged
 - ALWAYS update feature branches from main at least daily
+- ONLY commit code deliverables to PRs, NOT state files
 - ALWAYS document when rules are bypassed and why
 
 ### Error Handling Rules (High Priority)

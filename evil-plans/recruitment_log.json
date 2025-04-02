@@ -1,35 +1,59 @@
 {
-  "events": [
+  "recruitment_log": [
     {
       "date": "2025-03-30",
-      "action": "initial_email_sent",
-      "message_id": "195eae00a41db704",
-      "recipient": "aidan.buddy.pearce@gmail.com",
-      "status": "delivered"
+      "action": "INITIAL_EMAIL_SENT",
+      "email_id": "195eae00a41db704",
+      "target": "aidan.buddy.pearce@gmail.com",
+      "content_summary": "Initial recruitment email with project details",
+      "response": "NONE"
     },
     {
       "date": "2025-03-31",
-      "action": "follow_up_email_sent",
-      "message_id": "195eae9807066f4b", 
-      "recipient": "aidan.buddy.pearce@gmail.com",
-      "cc": "dusty.pearce@gmail.com",
-      "status": "delivered",
-      "notes": "Added cc to dusty.pearce@gmail.com for human-in-loop monitoring"
+      "action": "FOLLOW_UP_1_SENT",
+      "email_id": "195eae9807066f4b",
+      "target": "aidan.buddy.pearce@gmail.com",
+      "cc": ["dusty.pearce@gmail.com"
+      "content_summary": "Follow-up #1 with additional technical details",
+      "response": "NONE"
     },
     {
       "date": "2025-04-01",
-      "action": "follow_up_email_sent",
-      "message_id": "195f3a8279ddc542",
-      "recipient": "aidan.buddy.pearce@gmail.com",
-      "cc": "dusty.pearce@gmail.com",
-      "status": "delivered",
-      "notes": "Sent enhanced follow-up #2 with more enthusiastic tone and specific technical achievements"
+      "action": "FOLLOW_UP_2_SENT",
+      "email_id": "195f3a8279ddc542",
+      "target": "aidan.buddy.pearce@gmail.com",
+      "cc": ["dusty.pearce@gmail.com"
+      "content_summary": "Follow-up #2 with enthusiasm and demo offer",
+      "response": "NONE"
+    },
+    {
+      "date": "2025-04-02",
+      "action": "RESPONSE_RECEIVED",
+      "email_id": "195f3b7f3ea688b9",
+      "from": "aidan.buddy.pearce@gmail.com",
+      "content_summary": "Positive response indicating willingness for demonstration",
+      "response": "POSITIVE",
+      "next_action": "SCHEDULE_DEMO"
     }
-  ],
-  "status": {
-    "current_state": "FOLLOW_UP_2",
-    "last_action_date": "2025-04-01",
-    "follow_up_count": 2,
-    "workflow_type": "human_in_loop"
+  
+  "current_status": "DEMO_SCHEDULING",
+  "success_metrics": {
+    "emails_sent": 3,
+    "response_received": true,
+    "days_to_response": 3,
+    "positive_sentiment": true
   }
+}
+,
+  {
+    "date": "2025-04-02",
+    "action": "ONBOARDING_EMAIL_SENT",
+    "email_id": "195f3e98d3331705",
+    "target": "aidan.buddy.pearce@gmail.com",
+    "cc": ["dusty.pearce@gmail.com"
+    "content_summary": "Asynchronous onboarding proposal with documentation and GitHub access",
+    "response": "PENDING",
+    "next_action": "PREPARE_ONBOARDING_MATERIALS"
+  }
+]
 }

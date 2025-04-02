@@ -1,4 +1,4 @@
-# PROCEDURAL MEMORY [CHECKSUM:e8f3c7]
+# PROCEDURAL MEMORY [CHECKSUM:f9a2d5]
 
 
 ## EMAIL OPERATIONS
@@ -111,6 +111,13 @@
 - APPLICATION: Environment variable status, active ticket persistence, session continuity
 - DATE_ACQUIRED: [2025-03-25]
 - KEY_INSIGHT: State must include execution context, not just memory
+
+### LEARNING: state_file_management
+- CONCEPT: Proper separation of source code and state in version control
+- IMPLEMENTATION: [Only commit code deliverables to git, keep state files tracked locally]
+- APPLICATION: Prevents unnecessary commits of state changes, cleaner repository
+- DATE_ACQUIRED: [2025-04-02]
+- KEY_INSIGHT: Code deliverables go in PRs; state files remain local unless specifically backing up
 
 ### LEARNING: command_parsing
 - CONCEPT: Natural language command processing
