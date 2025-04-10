@@ -462,12 +462,22 @@ Benefits of this workflow:
 **STEPS**:
 1. Load personality profile and configuration
 2. Load current memory state and rules
-3. Process any special commands
-4. Initialize session tracking and state
-5. Present ready status with context summary
+3. Check for untracked files in the repository
+4. Alert user about untracked files and request instructions if found
+5. Process any special commands
+6. Initialize session tracking and state
+7. Present ready status with context summary
 
-**RULES**: Follows LOAD_ESSENTIAL_CONTEXT, VERIFY_ENVIRONMENT
+**RULES**: Follows LOAD_ESSENTIAL_CONTEXT, VERIFY_ENVIRONMENT, ALERT_DONT_ACT
 **ERRORS**: If file missing, initialize defaults; if state corruption, rebuild from logs
+
+**UNTRACKED FILES HANDLING**:
+- Use `git status` to identify untracked files
+- Group files by type (code, data, configuration, etc.)
+- Alert user with categorized list and request instructions
+- Make NO assumptions about how files should be handled
+- Only provide information, never take action without explicit instruction
+- Keep track of previously reported files to avoid repetitive notifications
 
 ### verify_environment_variables {#verify_environment_variables} [SIMPLE]
 **DESCRIPTION**: Checks required environment variables are available
