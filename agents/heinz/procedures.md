@@ -9,6 +9,7 @@
 - [handle_overlapping_prs](#handle_overlapping_prs) [COMPLEX]
 - [setup_worktree_for_ticket](#setup_worktree_for_ticket) [STANDARD]
 - [cleanup_worktree_for_ticket](#cleanup_worktree_for_ticket) [STANDARD]
+- [setup_shared_venv](#setup_shared_venv) [SIMPLE]
 
 ### Ticket Management
 - [create_ticket](#create_ticket) [SIMPLE]
@@ -63,12 +64,15 @@ Each procedure has a specific purpose in the ticket lifecycle:
 ### Git Worktree Workflow
 This workflow enables parallel work on multiple branches using git worktrees:
 
-1. **Setup**: For each ticket, create a dedicated worktree using [setup_worktree_for_ticket](#setup_worktree_for_ticket)
+1. **Setup**: 
+   - For each ticket, create a dedicated worktree using [setup_worktree_for_ticket](#setup_worktree_for_ticket)
+   - For Python projects, set up a shared virtual environment using [setup_shared_venv](#setup_shared_venv)
 
 2. **Parallel Development**: Work on multiple tickets simultaneously by physically switching directories rather than branches:
    - No need to commit work-in-progress changes when switching context
    - Each branch maintains its own working state
    - Reduced potential for merge conflicts by minimizing branch switching
+   - All worktrees can use the same shared Python virtual environment
 
 3. **Cleanup**: When work on a ticket is complete, use [cleanup_worktree_for_ticket](#cleanup_worktree_for_ticket) to remove the worktree
 
@@ -78,8 +82,31 @@ Benefits of this workflow:
 - Better isolation between features
 - Simpler mental model (physical separation mirrors logical separation)
 - Reduced overhead when working on multiple tickets
+- Consistent Python environment across all worktrees (with shared venv)
 
 ## PROCEDURES
+
+### setup_shared_venv {#setup_shared_venv} [SIMPLE]
+**DESCRIPTION**: Sets up a shared Python virtual environment for use across multiple worktrees
+
+**PREREQUISITES**:
+- Python 3.x installed
+- Project directory exists
+- Worktree-inator script available
+
+**STEPS**:
+1. Create shared_venv directory in the project root (not in any specific worktree)
+2. Create Python virtual environment with `python -m venv shared_venv`
+3. Upgrade pip with `shared_venv/bin/pip install --upgrade pip`
+4. Install required packages from requirements.txt if available
+5. Verify virtual environment is working correctly
+6. Update .gitignore to ensure the shared_venv directory is not committed
+7. Document venv location and activation instructions for all worktrees
+
+**RULES**: Follows AVOID_SENSITIVE_DATA, NEVER_COMMIT_VENV
+**ERRORS**: If Python not installed, prompt for installation; if directory creation fails, check permissions
+**RELATED PROCEDURES**: Often used with [setup_worktree_for_ticket](#setup_worktree_for_ticket)
+**NOTES**: Using a shared venv reduces duplication and ensures consistent dependencies across all worktrees
 
 ### setup_worktree_for_ticket {#setup_worktree_for_ticket} [STANDARD]
 **DESCRIPTION**: Creates a new git worktree for a ticket, enabling parallel work across multiple branches
@@ -91,16 +118,17 @@ Benefits of this workflow:
 
 **STEPS**:
 1. Verify ticket exists and has proper scope definition
-2. Choose appropriate location for the new worktree (e.g., parent directory of main repo)
+2. Choose appropriate location for the new worktree (within the project's worktrees directory)
 3. Format branch name according to convention (feature/CRA-XX-description)
 4. Check if branch already exists (local or remote)
-5. Create worktree with proper branch using `git worktree add ../branch-name branch-name`
-6. If branch doesn't exist, create it with `-b` flag: `git worktree add -b branch-name ../branch-name`
+5. Create worktree with proper branch using `git worktree add worktrees/CRA-XX branch-name`
+6. If branch doesn't exist, create it with `-b` flag: `git worktree add -b branch-name worktrees/CRA-XX`
 7. Verify worktree creation was successful with `git worktree list`
-8. Update ticket status to "In Progress" if needed
-9. Record worktree information in session state
+8. For Python projects, check if shared venv exists and suggest setup if needed
+9. Update ticket status to "In Progress" if needed
+10. Record worktree information in session state
 
-**VISUALIZATION**: Display progress through the 9 core steps with visual indicators
+**VISUALIZATION**: Display progress through the 10 core steps with visual indicators
 **RULES**: Follows ONE_BRANCH_PER_TICKET, BRANCH_NAMING_CONVENTION, DOCUMENT_CONTEXT
 **ERRORS**: If worktree creation fails, check permissions and git version; if branch exists but is in wrong state, resolve before proceeding
 **NOTES**: Worktrees enable parallel work on multiple branches without context switching overhead
