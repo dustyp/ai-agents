@@ -5,9 +5,12 @@
 set -e  # Exit on any error
 
 # Configuration
-WORKTREE_PARENT_DIR=$(dirname $(pwd))
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 REPO_ROOT="$SCRIPT_DIR/.."
+WORKTREE_DIR="$REPO_ROOT/worktrees"
+
+# Create worktrees directory if it doesn't exist
+mkdir -p "$WORKTREE_DIR"
 DEFAULT_BRANCH="main"
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
@@ -32,7 +35,7 @@ show_help() {
     echo "Examples:"
     echo "  $0 setup CRA-50 database-implementation"
     echo "  $0 list"
-    echo "  $0 cleanup ../feature-CRA-50-database-implementation"
+    echo "  $0 cleanup worktrees/CRA-50"
     echo
 }
 
@@ -47,7 +50,7 @@ setup_worktree() {
     TICKET_ID=$1
     DESCRIPTION=${2:-"implementation"}
     BRANCH_NAME="feature/${TICKET_ID}-${DESCRIPTION}"
-    WORKTREE_PATH="${WORKTREE_PARENT_DIR}/${BRANCH_NAME}"
+    WORKTREE_PATH="${WORKTREE_DIR}/${TICKET_ID}"
 
     echo "${BOLD}${BLUE}BEHOLD! The WORKTREE-CREATION-INATOR is now in action!${NORMAL}"
     echo "${YELLOW}▶️ STEP 1: Checking if branch exists...${NORMAL}"
