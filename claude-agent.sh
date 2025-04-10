@@ -1,6 +1,11 @@
 #!/bin/bash
 # claude-agent.sh - A wrapper script to fully bootstrap agents with Claude
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Load helper functions
+source "$SCRIPT_DIR/tools/init-helpers.sh"
+
 # Default values
 AGENT_NAME="heinz"
 PROMPT=""
@@ -41,6 +46,12 @@ if [ -n "$PROMPT" ]; then
 USER REQUEST: ${PROMPT}"
 else
     FULL_PROMPT="CRITICAL STARTUP INSTRUCTIONS: You must follow the bootstrap instructions in CLAUDE.md. If you cannot find your memory tool module then when you are done with the other tasks go back and try to search for the knowledge graph in your memory tool to gain additional context"
+fi
+
+# Check for untracked files before starting the agent
+if [ "$INTERACTIVE" = "true" ]; then
+    # Only check for untracked files in interactive mode
+    check_untracked_files
 fi
 
 # Run Claude with the appropriate instructions
