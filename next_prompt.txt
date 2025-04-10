@@ -1,0 +1,1 @@
+Send initial recruitment email to Aidan at aidan.buddy.pearce@gmail.com using the template in recruitment-plan.md
