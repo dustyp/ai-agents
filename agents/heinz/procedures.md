@@ -1,4 +1,4 @@
-# PROCEDURES LIBRARY [CHECKSUM:9d4c82]
+# PROCEDURES LIBRARY [CHECKSUM:d7e5f3]
 
 ## PROCEDURE MENU
 
@@ -7,6 +7,8 @@
 - [prepare_commit](#prepare_commit) [SIMPLE]
 - [create_pull_request](#create_pull_request) [STANDARD]
 - [handle_overlapping_prs](#handle_overlapping_prs) [COMPLEX]
+- [setup_worktree_for_ticket](#setup_worktree_for_ticket) [STANDARD]
+- [cleanup_worktree_for_ticket](#cleanup_worktree_for_ticket) [STANDARD]
 
 ### Ticket Management
 - [create_ticket](#create_ticket) [SIMPLE]
@@ -42,18 +44,90 @@ This workflow clarifies the relationship between ticket-related procedures:
 2. **Scope Analysis**: When ready to begin work, use [select_ticket_for_work](#select_ticket_for_work) to perform detailed scope refinement using sequential thinking
 
 3. **Implementation Setup**: After scope is defined, use [start_work_on_ticket](#start_work_on_ticket) to set up the proper branch and development environment
+   - **Alternative**: Use [setup_worktree_for_ticket](#setup_worktree_for_ticket) to create a separate worktree for parallel development
 
 4. **Development**: Work on implementation until complete
+   - If needed, use [switch_between_work_items](#switch_between_work_items) to move between active tickets/branches
 
 5. **Completion**: Use [complete_work_on_ticket](#complete_work_on_ticket) to finalize work and create PR
+   - If using worktrees, also use [cleanup_worktree_for_ticket](#cleanup_worktree_for_ticket) to remove the worktree
 
 Each procedure has a specific purpose in the ticket lifecycle:
 - `create_ticket`: Quick placeholder creation (minimal analysis)
 - `select_ticket_for_work`: Detailed scope analysis and refinement
 - `start_work_on_ticket`: Branch coordination and development setup
+- `setup_worktree_for_ticket`: Create separate working directory for parallel development
 - `complete_work_on_ticket`: Work finalization and PR creation
+- `cleanup_worktree_for_ticket`: Remove worktree after ticket completion
+
+### Git Worktree Workflow
+This workflow enables parallel work on multiple branches using git worktrees:
+
+1. **Setup**: For each ticket, create a dedicated worktree using [setup_worktree_for_ticket](#setup_worktree_for_ticket)
+
+2. **Parallel Development**: Work on multiple tickets simultaneously by physically switching directories rather than branches:
+   - No need to commit work-in-progress changes when switching context
+   - Each branch maintains its own working state
+   - Reduced potential for merge conflicts by minimizing branch switching
+
+3. **Cleanup**: When work on a ticket is complete, use [cleanup_worktree_for_ticket](#cleanup_worktree_for_ticket) to remove the worktree
+
+Benefits of this workflow:
+- Cleaner commit history (no WIP commits)
+- More efficient context switching (no need to stash/commit changes)
+- Better isolation between features
+- Simpler mental model (physical separation mirrors logical separation)
+- Reduced overhead when working on multiple tickets
 
 ## PROCEDURES
+
+### setup_worktree_for_ticket {#setup_worktree_for_ticket} [STANDARD]
+**DESCRIPTION**: Creates a new git worktree for a ticket, enabling parallel work across multiple branches
+
+**PREREQUISITES**:
+- Ticket exists in Linear with basic information
+- Main repository is already cloned
+- Git version 2.5 or higher installed
+
+**STEPS**:
+1. Verify ticket exists and has proper scope definition
+2. Choose appropriate location for the new worktree (e.g., parent directory of main repo)
+3. Format branch name according to convention (feature/CRA-XX-description)
+4. Check if branch already exists (local or remote)
+5. Create worktree with proper branch using `git worktree add ../branch-name branch-name`
+6. If branch doesn't exist, create it with `-b` flag: `git worktree add -b branch-name ../branch-name`
+7. Verify worktree creation was successful with `git worktree list`
+8. Update ticket status to "In Progress" if needed
+9. Record worktree information in session state
+
+**VISUALIZATION**: Display progress through the 9 core steps with visual indicators
+**RULES**: Follows ONE_BRANCH_PER_TICKET, BRANCH_NAMING_CONVENTION, DOCUMENT_CONTEXT
+**ERRORS**: If worktree creation fails, check permissions and git version; if branch exists but is in wrong state, resolve before proceeding
+**NOTES**: Worktrees enable parallel work on multiple branches without context switching overhead
+
+### cleanup_worktree_for_ticket {#cleanup_worktree_for_ticket} [STANDARD]
+**DESCRIPTION**: Properly removes a git worktree after work on a ticket is completed
+
+**PREREQUISITES**:
+- Work on ticket is completed
+- Worktree exists for the ticket
+- Changes are committed and pushed
+- PR is created (if applicable)
+
+**STEPS**:
+1. Verify all changes are committed or intentionally discarded
+2. Ensure branch is pushed to remote if needed
+3. Navigate out of the worktree directory
+4. Use `git worktree list` to confirm the worktree path
+5. Remove the worktree using `git worktree remove path/to/worktree`
+6. Verify worktree was successfully removed with `git worktree list`
+7. Update ticket status to reflect completion
+8. Document worktree removal in session state
+
+**VISUALIZATION**: Display progress through the 8 core steps with visual indicators
+**RULES**: Follows CLEAN_UP_AFTER_COMPLETION, DOCUMENT_CONTEXT
+**ERRORS**: If worktree has uncommitted changes, commit or stash them first; if worktree removal fails, check for processes using files in the worktree
+**RELATED PROCEDURES**: Often follows [complete_work_on_ticket](#complete_work_on_ticket)
 
 ### create_ticket {#create_ticket} [SIMPLE]
 **DESCRIPTION**: Creates a placeholder ticket in Linear for future work
@@ -229,14 +303,22 @@ Each procedure has a specific purpose in the ticket lifecycle:
 
 **STEPS**:
 1. Save current state with proper documentation
-2. Commit work-in-progress changes with [WIP] prefix
+2. Commit work-in-progress changes with [WIP] prefix (traditional approach)
 3. Clean working directory and document stopping point
 4. Checkout target branch and pull latest changes
 5. Update both tickets with context switch information
 
-**VISUALIZATION**: Display progress through the 5 core steps with visual indicators
+**ALTERNATIVE STEPS (with worktrees)**:
+1. Document current progress in session state
+2. Save editor state if relevant (e.g., VS Code workspace)
+3. Exit current worktree directory
+4. Navigate to target worktree directory (or create using setup_worktree_for_ticket)
+5. Update session state to reflect new active ticket
+
+**VISUALIZATION**: Display progress through the core steps with visual indicators
 **RULES**: Follows DOCUMENT_CONTEXT, SAVE_WORK_IN_PROGRESS
 **ERRORS**: If uncommitted changes, stash or commit WIP; if branch conflicts, resolve before switching
+**RELATED PROCEDURES**: For worktree approach, see [setup_worktree_for_ticket](#setup_worktree_for_ticket)
 
 ### complete_work_on_ticket {#complete_work_on_ticket} [STANDARD]
 **DESCRIPTION**: Finalizes work on a ticket and prepares for review
