@@ -49,10 +49,10 @@ else
 fi
 
 # Check for untracked files before starting the agent
-if [ "$INTERACTIVE" = "true" ]; then
+#if [ "$INTERACTIVE" = "true" ]; then
     # Only check for untracked files in interactive mode
-    check_untracked_files
-fi
+    #check_untracked_files
+#fi
 
 # Run Claude with the appropriate instructions
 if [ "$INTERACTIVE" = "true" ]; then
